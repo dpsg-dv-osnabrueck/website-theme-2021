@@ -1,17 +1,5 @@
 <?php
 
-// Register Vue.js
-function registerVueJS() {
-    wp_register_script( 'appScripts', get_stylesheet_directory_uri() . '/js/app.');
-    wp_register_script( 'chunkScripts', get_stylesheet_directory_uri() . '/js/chunk-vendors.js');
-  
-    wp_enqueue_script('google-maps');
-    wp_enqueue_script('equalheights');
-
-}
-add_action( 'wp_enqueue_scripts', 'registerVueJS' );
-
-
 // Register main navigation
 function registerMainNav() {
   register_nav_menus(
