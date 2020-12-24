@@ -1,29 +1,51 @@
-# dpsg-theme-2021
+# DPSG OS website theme 2021
+
+_**Frontend application realized with Vue.js and Bulma**_
+
+---
+---
 
 ## Project setup
+#### Choose the right node version
+```
+nvm use
+```
+#### Install node packages
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+---
+## Build tasks
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Run your unit tests
+---
+### Testing
+#### Run your unit tests
 ```
 npm run test:unit
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 ```
 npm run lint
 ```
+---
+### Documentation
+#### Create documentation page
+```
+npm run docs:build
+```
+#### Serve documentation page with live server
+```
+npm run docs:serve
+```
+---
+---
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
