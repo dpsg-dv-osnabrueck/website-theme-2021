@@ -1,13 +1,25 @@
 <template>
-  <div class="container mx-auto">
-    <h1>{{ i18n.APP_TITLE }}</h1>
-    <img :src="logo" width="300" />
-
-    <a @click="getData">getData</a>
-
-    <a @click="postData">postData</a>
-
-    <a @click="changeLocale('en-EN')">changeLocale</a>
+  <div>
+    <GridContainer>
+      <GridRow>
+        <GridCell width="12">
+          <Title>{{ i18n.APP_TITLE }}</Title>
+          <img :src="logo" width="300" />
+        </GridCell>
+      </GridRow>
+      <GridRow>
+        <GridCell width="6">
+          <div>
+            <a @click="getData">getData</a>
+          </div>
+        </GridCell>
+        <GridCell width="6">
+          <div>
+            <a @click="postData">postData</a>
+          </div>
+        </GridCell>
+      </GridRow>
+    </GridContainer>
   </div>
 </template>
 
