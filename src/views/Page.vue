@@ -1,20 +1,31 @@
 <template>
-  <div class="content">
+  <div class="my-6">
     <GridContainer>
-      <GridRow isCentered>
-        <GridCell :width="{ tablet: 8, widescreen: 6 }">
-          <div v-if="page.requestStatus === status.ready" class="my-6">
+      <div v-if="page.requestStatus === status.ready">
+        <GridRow isCentered>
+          <GridCell :width="{ tablet: 8, widescreen: 6 }">
             <Title class="mb-2">{{ title }}</Title>
-            <div v-html="content"></div>
-          </div>
-          <div v-else>
+            <div v-html="content" class="content"></div>
+          </GridCell>
+          <GridCell :width="{ tablet: 3, widescreen: 2 }" v-if="subNav">
+            <SubNavigation
+              :data="subNav"
+              :activePage="currentPage.slug"
+              v-if="subNav.children"
+            />
+          </GridCell>
+        </GridRow>
+      </div>
+      <div v-else>
+        <GridRow isCentered>
+          <GridCell :width="{ tablet: 8, widescreen: 6 }">
             <progress
               class="progress is-small is-info my-6"
               max="100"
             ></progress>
-          </div>
-        </GridCell>
-      </GridRow>
+          </GridCell>
+        </GridRow>
+      </div>
     </GridContainer>
   </div>
 </template>
@@ -22,19 +33,33 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import requestStatus from '@/data/requestStatus';
+import SubNavigation from '@/components/molecules/SubNavigation/SubNavigation.vue';
 
 export default {
   name: 'Page',
+  components: {
+    SubNavigation,
+  },
   computed: {
-    ...mapState(['page']),
+    ...mapState(['page', 'menus']),
     status() {
       return requestStatus;
     },
-    content() {
-      return this.page.currentPage.content.rendered;
+
+    currentPage() {
+      return this.page.currentPage;
     },
+
+    content() {
+      return this.currentPage.content.rendered;
+    },
+
     title() {
-      return this.page.currentPage.title.rendered;
+      return this.currentPage.title.rendered;
+    },
+
+    subNav() {
+      return this.page.subNav;
     },
   },
   methods: {
@@ -43,10 +68,12 @@ export default {
       this.getPage(slug);
     },
   },
+
   beforeRouteUpdate(to, from, next) {
     this.loadData(to.params.slug);
     next();
   },
+
   mounted() {
     this.loadData(this.$route.params.slug);
   },

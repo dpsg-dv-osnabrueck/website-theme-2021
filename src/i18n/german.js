@@ -16,4 +16,5 @@ export default {
   APP_SOCIAL_TWITTER_URL: 'https://twitter.com/DPSG_OS',
   APP_SOCIAL_INSTAGRAM: 'Instagram',
   APP_SOCIAL_INSTAGRAM_URL: 'https://www.instagram.com/dpsgos/',
+  APP_PAGE_SUB_NAV_TITLE: 'Navigation',
 };

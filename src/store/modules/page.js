@@ -1,17 +1,22 @@
 /* eslint-disable no-shadow */
 import wordpressAPI from '@/api/wordpressAPI';
 import requestStatus from '@/data/requestStatus';
+import { find } from 'lodash';
 
 export const namespaced = true;
 
 export const state = {
   currentPage: {},
+  subNav: {},
   requestStatus: requestStatus.init,
 };
 
 export const mutations = {
   SET_DATA(state, data) {
     state.currentPage = data;
+  },
+  SET_SUBNAV(state, data) {
+    state.subNav = data;
   },
   SET_REQUEST_STATUS(state, status) {
     state.requestStatus = status;
@@ -23,7 +28,7 @@ export const mutations = {
 };
 
 export const actions = {
-  getPage({ commit }, slug) {
+  getPage({ commit, dispatch }, slug) {
     commit('SET_REQUEST_STATUS', requestStatus.loading);
     wordpressAPI.getPage(slug)
       .then((response) => {
@@ -32,6 +37,7 @@ export const actions = {
           commit('SET_REQUEST_STATUS', requestStatus.error);
         } else {
           commit('SET_DATA', response.data[0]);
+          dispatch('setSubNav', response.data[0].slug);
           commit('SET_REQUEST_STATUS', requestStatus.ready);
         }
       })
@@ -43,6 +49,41 @@ export const actions = {
 
   resetPage({ commit }) {
     commit('RESET_PAGE');
+  },
+
+  setSubNav({ commit, rootState }, slug) {
+    const { items } = rootState.menus.menus;
+    const navItems = [];
+    const mergedItems = [];
+
+    if (!items) return;
+
+    items.forEach((item) => {
+      if (item.children) {
+        item.children.forEach((element) => {
+          const newElement = { ...element };
+          if (element.children) {
+            const slug = [];
+            element.children.forEach((subElement) => {
+              slug.push(subElement.object_slug);
+            });
+            newElement.slugs = slug;
+          }
+          navItems.push(newElement);
+        });
+      }
+    });
+
+    navItems.forEach((item) => {
+      if (item.slugs) {
+        item.slugs.forEach((subItem) => {
+          mergedItems.push({ ...item, object_slug: subItem });
+        });
+      }
+    });
+
+    mergedItems.push(...navItems);
+    commit('SET_SUBNAV', find(mergedItems, { object_slug: slug }));
   },
 
 };
