@@ -17,7 +17,7 @@ import errorMessages from '@/data/errorMessages';
  * // Output: 'I bought 5 eggs'
  * @example stringReplacer('I bought $AMOUNT1$ eggs and $AMOUNT2$ apples', [5,2])
  * // Output: 'I bought 5 eggs and 2 apples'
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  *
  */
 const stringReplacer = (string, value) => {

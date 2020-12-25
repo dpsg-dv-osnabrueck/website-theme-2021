@@ -13,7 +13,7 @@ import errorMessages from '@/data/errorMessages';
  * @param {array} [items=caching] Default values can be found in src/store/settings/caching.js
  * @returns {Object} Only values, that are specified in items array
  * @example cachingHelper.write({key: 'value'})
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  *
  */
 const write = (state, items = caching) => {
@@ -53,7 +53,7 @@ const write = (state, items = caching) => {
  * @param {array} [items=caching] Default values van be found in src/store/settings/caching.js
  * @returns {Object} Combined state which includes cached values
  * @example cachingHelper.read({key: 'oldValue'}, {key: 'newValue'})
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  *
  */
 const read = (state, cachedState, items = caching) => {

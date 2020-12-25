@@ -5,7 +5,7 @@ import storageHelper from '@/helper/storageHelper';
 import storageNames from '@/data/storageNames';
 
 import * as i18n from '@/store/modules/i18n';
-import * as exampleModule from '@/store/modules/exampleModule';
+import * as menus from '@/store/modules/menus';
 
 Vue.use(Vuex);
 
@@ -13,7 +13,7 @@ export default new Vuex.Store({
 
   modules: {
     i18n,
-    exampleModule,
+    menus,
   },
 
   mutations: {

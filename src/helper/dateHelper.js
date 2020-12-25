@@ -23,7 +23,7 @@ const formatDateTime = (date, option, locale) => {
  * @param {?string} [locale=de-DE]
  * @returns {string}
  * @example dateHelper(new Date(), 'time') // Output: 12:11
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  */
 const dateHelper = (date, option = 'date', locale = 'de-DE') => {
   if (!date) throw new Error(errorMessages.DATE_HELPER.NO_VALUE);

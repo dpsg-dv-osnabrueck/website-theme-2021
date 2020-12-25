@@ -9,7 +9,7 @@ import errorMessages from '@/data/errorMessages';
  * @param {?string} [currency=EUR]
  * @returns {string}
  * @example currencyHelper(20) // Output: 20,00 €
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  *
  */
 const currencyHelper = (price, locale = 'de-DE', currency = 'EUR') => {

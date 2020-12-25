@@ -1,16 +1,24 @@
 <template>
-  <router-view/>
+  <div>
+    <Navigation />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import Navigation from '@/components/molecules/Navigation/Navigation.vue';
 
 export default {
   name: 'App',
+  components: {
+    Navigation,
+  },
   computed: {
     ...mapGetters('i18n', ['i18n']),
   },
   methods: {
+    ...mapActions('menus', ['getMenus']),
     setTitle() {
       if (this.$router.history.current.name) {
         document.title = `${this.i18n.APP_TITLE} - ${this.$router.history.current.name}`;
@@ -19,6 +27,7 @@ export default {
   },
   mounted() {
     this.setTitle();
+    this.getMenus();
   },
   updated() {
     this.setTitle();

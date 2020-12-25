@@ -11,7 +11,7 @@ import errorMessages from '@/data/errorMessages';
  * @param {*} value
  * @param {string} key
  * @example storageHelper.write('Some value', 'someKey')
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  */
 const write = (value, key) => {
   if (!value) {
@@ -32,7 +32,7 @@ const write = (value, key) => {
  * @param {string} key
  * @example storageHelper.read('someKey')
  * @returns {Object | string} If nothing is found, an empty string will be returned
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  */
 const read = (key) => {
   if (!key) {
@@ -49,7 +49,7 @@ const read = (key) => {
  *
  * @param {string} key
  * @example storageHelper.remove('someKey')
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  */
 const remove = (key) => {
   if (!key) {
@@ -63,7 +63,7 @@ const remove = (key) => {
  *
  * Clear whole local storage
  * @example storageHelper.clear()
- * @author Dominik Niemann <dominik@polargold.de>
+ * @author Dominik Niemann <info@dpsg-os.de>
  */
 const clear = () => {
   localStorage.clear();
