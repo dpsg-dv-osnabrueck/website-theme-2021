@@ -8,10 +8,10 @@ export default {
   },
   PAGES: {
     ALL: '/pages',
-    SINGLE: '/page',
+    SINGLE: '/pages',
   },
   POSTS: {
     ALL: '/posts',
-    SINGLE: '/post',
+    SINGLE: '/posts',
   },
 };

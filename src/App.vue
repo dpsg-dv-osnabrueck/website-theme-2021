@@ -18,7 +18,10 @@ export default {
     ...mapGetters('i18n', ['i18n']),
   },
   methods: {
-    ...mapActions('menus', ['getMenus']),
+    ...mapActions({
+      getMenus: 'menus/getMenus',
+      getPages: 'pages/getPages',
+    }),
     setTitle() {
       if (this.$router.history.current.name) {
         document.title = `${this.i18n.APP_TITLE} - ${this.$router.history.current.name}`;

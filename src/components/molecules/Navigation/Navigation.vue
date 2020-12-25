@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="#" :title="i18n.APP_TITLE">
+      <a class="navbar-item" href="#" :title="i18n.APP_TITLE" @click="goHome">
         <img :src="logo" width="48" height="48" :alt="i18n.APP_TITLE" />
       </a>
       <a
@@ -28,7 +28,9 @@
           v-for="(item, index) of menuItems"
           :key="index"
         >
-          {{ !item.children ? item.title : null }}
+          <span v-if="!item.children" @click="goToPage(item.object_slug)">
+            {{ item.title }}
+          </span>
           <a v-if="item.children" class="navbar-link" :title="item.title">
             {{ item.title }}
           </a>
@@ -38,6 +40,7 @@
               :key="subIndex"
               class="navbar-item"
               :title="subItem.title"
+              @click="goToPage(subItem.object_slug)"
             >
               {{ subItem.title }}
             </a>
@@ -109,6 +112,14 @@ export default {
 
     toggleMenu() {
       this.isActive = !this.isActive;
+    },
+
+    goToPage(slug) {
+      this.$router.push({ name: 'Page', params: { slug } });
+    },
+
+    goHome() {
+      this.$router.push({ name: 'Home' });
     },
   },
 };

@@ -28,7 +28,7 @@ const getMenu = (id) => apiClient.get(`${ROUTES.MENU_API}${ROUTES.MENUS.SINGLE}/
  * @example wordpressAPI.getPages().then((response) => console.log(response));
  * @author Dominik Niemann <info@dpsg-os.de>
  */
-const getPages = () => apiClient.get(ROUTES.DEFAULT.PAGES.ALL);
+const getPages = () => apiClient.get(`${ROUTES.DEFAULT}${ROUTES.PAGES.ALL}?per_page=100`);
 
 /**
  * Retrieve a single page
@@ -37,7 +37,7 @@ const getPages = () => apiClient.get(ROUTES.DEFAULT.PAGES.ALL);
  * @example wordpressAPI.getPage(5).then((response) => console.log(response));
  * @author Dominik Niemann <info@dpsg-os.de>
  */
-const getPage = (id) => apiClient.get(`${ROUTES.DEFAULT.PAGE.ALL}/${id}`);
+const getPage = (slug) => apiClient.get(`${ROUTES.DEFAULT}${ROUTES.PAGES.SINGLE}/?slug=${slug}`);
 
 /**
  * Retrieve a list of all gets
