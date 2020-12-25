@@ -32,37 +32,28 @@ const getPages = () => apiClient.get(`${ROUTES.DEFAULT}${ROUTES.PAGES.ALL}?per_p
 
 /**
  * Retrieve a single page
- * @param {number} id page id
+ * @param {string} slug page slug
  * @returns {Promise<AxiosResponse<any>>}
- * @example wordpressAPI.getPage(5).then((response) => console.log(response));
+ * @example wordpressAPI.getPage('page-name').then((response) => console.log(response));
  * @author Dominik Niemann <info@dpsg-os.de>
  */
 const getPage = (slug) => apiClient.get(`${ROUTES.DEFAULT}${ROUTES.PAGES.SINGLE}/?slug=${slug}`);
 
 /**
- * Retrieve a list of all gets
+ * Retrieve a single media item
+ * @param {number} id media item id
  * @returns {Promise<AxiosResponse<any>>}
- * @example wordpressAPI.getPages().then((response) => console.log(response));
+ * @example wordpressAPI.getMediaItem(5).then((response) => console.log(response));
  * @author Dominik Niemann <info@dpsg-os.de>
  */
-const getgets = () => apiClient.get(ROUTES.DEFAULT.getS.ALL);
-
-/**
- * Retrieve a single get
- * @param {number} id get id
- * @returns {Promise<AxiosResponse<any>>}
- * @example wordpressAPI.getget(5).then((response) => console.log(response));
- * @author Dominik Niemann <info@dpsg-os.de>
- */
-const getget = (id) => apiClient.get(`${ROUTES.DEFAULT.get.ALL}/${id}`);
+const getMediaItem = (id) => apiClient.get(`${ROUTES.DEFAULT}${ROUTES.MEDIA.SINGLE}/${id}`);
 
 const exportFunctions = {
   getMenus,
   getMenu,
   getPages,
   getPage,
-  getgets,
-  getget,
+  getMediaItem,
 };
 
 export default exportFunctions;

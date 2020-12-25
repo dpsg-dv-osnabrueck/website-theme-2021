@@ -4,7 +4,19 @@
       <div v-if="page.requestStatus === status.ready">
         <GridRow isCentered>
           <GridCell :width="{ tablet: 8, widescreen: 6 }">
-            <Title class="mb-2">{{ title }}</Title>
+            <div v-if="featuredImage" class="featuredImage mb-6">
+              <img :src="featuredImage" />
+              <div class="p-3 mb-3 has-background-primary">
+                <Title>
+                  <span class="has-text-white">
+                    {{ title }}
+                  </span>
+                </Title>
+              </div>
+            </div>
+            <div v-else>
+              <Title class="mb-2">{{ title }}</Title>
+            </div>
             <div v-html="content" class="content"></div>
           </GridCell>
           <GridCell :width="{ tablet: 3, widescreen: 2 }" v-if="subNav">
@@ -61,6 +73,12 @@ export default {
     subNav() {
       return this.page.subNav;
     },
+
+    featuredImage() {
+      if (!this.currentPage.featuredImage) return null;
+      const url = 'https://dpsg-os.de/wp-content/uploads/';
+      return `${url}${this.currentPage.featuredImage.media_details.file}`;
+    },
   },
   methods: {
     ...mapActions('page', ['getPage', 'resetPage']),
@@ -85,3 +103,25 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.featuredImage {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-end;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  > div {
+    position: absolute;
+    opacity: 0.8;
+  }
+}
+</style>

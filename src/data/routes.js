@@ -14,4 +14,7 @@ export default {
     ALL: '/posts',
     SINGLE: '/posts',
   },
+  MEDIA: {
+    SINGLE: '/media',
+  },
 };

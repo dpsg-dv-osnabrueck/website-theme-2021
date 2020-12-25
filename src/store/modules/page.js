@@ -15,6 +15,9 @@ export const mutations = {
   SET_DATA(state, data) {
     state.currentPage = data;
   },
+  SET_FEATURED_IMAGE(state, data) {
+    state.currentPage.featuredImage = data;
+  },
   SET_SUBNAV(state, data) {
     state.subNav = data;
   },
@@ -38,7 +41,13 @@ export const actions = {
         } else if (response.data[0]) {
           commit('SET_DATA', response.data[0]);
           dispatch('setSubNav', response.data[0].slug);
-          commit('SET_REQUEST_STATUS', requestStatus.ready);
+          if (response.data[0].featured_media) {
+            dispatch('getFeaturedImage', response.data[0].featured_media).then(() => {
+              commit('SET_REQUEST_STATUS', requestStatus.ready);
+            });
+          } else {
+            commit('SET_REQUEST_STATUS', requestStatus.ready);
+          }
         } else {
           commit('SET_DATA', null);
           commit('SET_REQUEST_STATUS', requestStatus.error);
@@ -77,6 +86,20 @@ export const actions = {
     });
 
     commit('SET_SUBNAV', find(navItems, { object_slug: slug }));
+  },
+
+  getFeaturedImage({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      wordpressAPI.getMediaItem(id).then((response) => {
+        if (response.status === 200) {
+          commit('SET_FEATURED_IMAGE', response.data);
+          resolve();
+        }
+      }).catch((error) => {
+        console.log(error);
+        reject();
+      });
+    });
   },
 
 };
