@@ -36,8 +36,14 @@ export const actions = {
           console.error(response);
           commit('SET_REQUEST_STATUS', requestStatus.error);
         } else {
-          commit('SET_DATA', response.data[0]);
-          dispatch('setSubNav', response.data[0].slug);
+          if (response.data[0]) {
+            commit('SET_DATA', response.data[0]);
+            dispatch('setSubNav', response.data[0].slug);
+          } else {
+            console.error('Page not found');
+            commit('SET_REQUEST_STATUS', requestStatus.error);
+          }
+
           commit('SET_REQUEST_STATUS', requestStatus.ready);
         }
       })
