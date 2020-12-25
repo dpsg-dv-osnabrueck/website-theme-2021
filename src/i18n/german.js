@@ -1,5 +1,7 @@
 export default {
   APP_TITLE: 'DPSG Diözesanverband Osnabrück',
+  APP_DESCRIPTION: 'Wir freuen uns dich kennen zu lernen.',
+  APP_STAGE_CTA: 'Lerne uns kennen',
   FORM_GENDER_FEMALE: 'Frau',
   FORM_GENDER_MALE: 'Herr',
   FORM_GENDER_NON_BINARY: 'Hallo',
