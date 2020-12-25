@@ -76,8 +76,7 @@ export default {
 
     featuredImage() {
       if (!this.currentPage.featuredImage) return null;
-      const url = 'https://dpsg-os.de/wp-content/uploads/';
-      return `${url}${this.currentPage.featuredImage.media_details.file}`;
+      return this.currentPage.featuredImage.source_url;
     },
   },
   methods: {
