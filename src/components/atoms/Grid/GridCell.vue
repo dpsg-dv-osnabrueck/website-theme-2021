@@ -8,8 +8,8 @@
 export default {
   name: 'GridCell',
   props: {
-    width: String,
-    offset: String,
+    width: [String, Object],
+    offset: [String, Object],
   },
   data() {
     return {

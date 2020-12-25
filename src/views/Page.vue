@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="content">
     <GridContainer>
-      <GridRow>
-        <GridCell>
+      <GridRow isCentered>
+        <GridCell :width="{ tablet: 8, widescreen: 6 }">
           <div v-if="page.requestStatus === status.ready" class="my-6">
             <Title class="mb-2">{{ title }}</Title>
             <div v-html="content"></div>
@@ -49,9 +49,6 @@ export default {
   },
   mounted() {
     this.loadData(this.$route.params.slug);
-  },
-  beforeDestroy() {
-    this.resetPage();
   },
 };
 </script>
