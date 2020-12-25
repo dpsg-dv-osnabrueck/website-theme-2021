@@ -35,16 +35,13 @@ export const actions = {
         if (response.status !== 200) {
           console.error(response);
           commit('SET_REQUEST_STATUS', requestStatus.error);
-        } else {
-          if (response.data[0]) {
-            commit('SET_DATA', response.data[0]);
-            dispatch('setSubNav', response.data[0].slug);
-          } else {
-            console.error('Page not found');
-            commit('SET_REQUEST_STATUS', requestStatus.error);
-          }
-
+        } else if (response.data[0]) {
+          commit('SET_DATA', response.data[0]);
+          dispatch('setSubNav', response.data[0].slug);
           commit('SET_REQUEST_STATUS', requestStatus.ready);
+        } else {
+          commit('SET_DATA', null);
+          commit('SET_REQUEST_STATUS', requestStatus.error);
         }
       })
       .catch((error) => {
@@ -60,36 +57,26 @@ export const actions = {
   setSubNav({ commit, rootState }, slug) {
     const { items } = rootState.menus.menus;
     const navItems = [];
-    const mergedItems = [];
 
     if (!items) return;
 
-    items.forEach((item) => {
-      if (item.children) {
-        item.children.forEach((element) => {
-          const newElement = { ...element };
-          if (element.children) {
-            const slug = [];
-            element.children.forEach((subElement) => {
-              slug.push(subElement.object_slug);
+    // 1st navigation layer
+    items.forEach((navItem) => {
+      if (navItem.children) {
+        // 2nd navigation layer
+        navItem.children.forEach((subNavItem) => {
+          navItems.push(subNavItem);
+          if (subNavItem.children) {
+          // 3rd navigation layer
+            subNavItem.children.forEach((subSubNavItem) => {
+              navItems.push({ ...subNavItem, object_slug: subSubNavItem.object_slug });
             });
-            newElement.slugs = slug;
           }
-          navItems.push(newElement);
         });
       }
     });
 
-    navItems.forEach((item) => {
-      if (item.slugs) {
-        item.slugs.forEach((subItem) => {
-          mergedItems.push({ ...item, object_slug: subItem });
-        });
-      }
-    });
-
-    mergedItems.push(...navItems);
-    commit('SET_SUBNAV', find(mergedItems, { object_slug: slug }));
+    commit('SET_SUBNAV', find(navItems, { object_slug: slug }));
   },
 
 };

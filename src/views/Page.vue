@@ -16,7 +16,7 @@
           </GridCell>
         </GridRow>
       </div>
-      <div v-else>
+      <div v-if="page.requestStatus === status.loading">
         <GridRow isCentered>
           <GridCell :width="{ tablet: 8, widescreen: 6 }">
             <progress
@@ -76,6 +76,12 @@ export default {
 
   mounted() {
     this.loadData(this.$route.params.slug);
+  },
+  updated() {
+    console.log(this.page.requestStatus, this.status.error);
+    if (this.page.requestStatus === this.status.error) {
+      this.$router.push({ name: 'Page', params: { slug: 'not-found' } });
+    }
   },
 };
 </script>

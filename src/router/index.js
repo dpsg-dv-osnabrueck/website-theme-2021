@@ -20,6 +20,11 @@ const routes = [
     path: '/:slug/:subSlug',
     component: Page,
   },
+  {
+    path: '*',
+    name: 'NotFound',
+    redirect: { name: 'Page', params: { slug: 'not-found' } },
+  },
 ];
 
 const router = new VueRouter({
