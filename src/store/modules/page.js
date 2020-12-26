@@ -2,6 +2,7 @@
 import wordpressAPI from '@/api/wordpressAPI';
 import requestStatus from '@/data/requestStatus';
 import { find } from 'lodash';
+import imageHelper from '@/helper/imageHelper';
 
 export const namespaced = true;
 
@@ -9,6 +10,7 @@ export const state = {
   currentPage: {},
   subNav: {},
   requestStatus: requestStatus.init,
+  teamImages: {},
 };
 
 export const mutations = {
@@ -18,6 +20,9 @@ export const mutations = {
   SET_FEATURED_IMAGE(state, data) {
     state.currentPage.featuredImage = data;
   },
+  SET_TEAM_IMAGE(state, data) {
+    state.teamImages[data.name] = data.image;
+  },
   SET_SUBNAV(state, data) {
     state.subNav = data;
   },
@@ -26,37 +31,33 @@ export const mutations = {
   },
   RESET_PAGE(state) {
     state.currentPage = {};
-    requestStatus = requestStatus.init;
+    state.requestStatus = requestStatus.init;
+    state.teamImages = {};
   },
 };
 
 export const actions = {
-  getPage({ commit, dispatch }, slug) {
-    commit('SET_REQUEST_STATUS', requestStatus.loading);
-    wordpressAPI.getPage(slug)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.error(response);
-          commit('SET_REQUEST_STATUS', requestStatus.error);
-        } else if (response.data[0]) {
-          commit('SET_DATA', response.data[0]);
-          dispatch('setSubNav', response.data[0].slug);
-          if (response.data[0].featured_media) {
-            dispatch('getFeaturedImage', response.data[0].featured_media).then(() => {
-              commit('SET_REQUEST_STATUS', requestStatus.ready);
-            });
+  getPage({ commit }, slug) {
+    return new Promise((resolve, reject) => {
+      wordpressAPI.getPage(slug)
+        .then((response) => {
+          if (response.status !== 200) {
+            commit('SET_REQUEST_STATUS', requestStatus.error);
+            reject(console.error(response));
+          } else if (response.data[0]) {
+            commit('SET_DATA', response.data[0]);
+            resolve();
           } else {
-            commit('SET_REQUEST_STATUS', requestStatus.ready);
+            commit('SET_DATA', null);
+            commit('SET_REQUEST_STATUS', requestStatus.error);
+            resolve();
           }
-        } else {
-          commit('SET_DATA', null);
+        })
+        .catch((error) => {
           commit('SET_REQUEST_STATUS', requestStatus.error);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        commit('SET_REQUEST_STATUS', requestStatus.error);
-      });
+          reject(console.error(error));
+        });
+    });
   },
 
   resetPage({ commit }) {
@@ -88,18 +89,28 @@ export const actions = {
     commit('SET_SUBNAV', find(navItems, { object_slug: slug }));
   },
 
-  getFeaturedImage({ commit }, id) {
-    return new Promise((resolve, reject) => {
-      wordpressAPI.getMediaItem(id).then((response) => {
-        if (response.status === 200) {
-          commit('SET_FEATURED_IMAGE', response.data);
+  getFeaturedImage({ commit, state }) {
+    const id = state.currentPage.featured_media;
+    return new Promise((resolve) => {
+      if (id) {
+        imageHelper(id, 'portrait').then((response) => {
+          commit('SET_FEATURED_IMAGE', response);
           resolve();
-        }
-      }).catch((error) => {
-        console.log(error);
-        reject();
-      });
+        });
+      } else {
+        resolve();
+      }
     });
   },
 
+  loadPageData({ commit, dispatch }, slug) {
+    commit('SET_REQUEST_STATUS', requestStatus.loading);
+    dispatch('resetPage');
+    dispatch('getPage', slug).then(() => {
+      dispatch('setSubNav', state.currentPage.slug);
+      dispatch('getFeaturedImage').then(() => {
+        commit('SET_REQUEST_STATUS', requestStatus.ready);
+      });
+    });
+  },
 };

@@ -18,6 +18,7 @@
               <Title class="mb-2">{{ title }}</Title>
             </div>
             <div v-html="content" class="content"></div>
+            <TeamMember :data="teamMember" v-if="teamMember" />
           </GridCell>
           <GridCell :width="{ tablet: 3, widescreen: 2 }" v-if="subNav">
             <SubNavigation
@@ -46,11 +47,13 @@
 import { mapActions, mapState } from 'vuex';
 import requestStatus from '@/data/requestStatus';
 import SubNavigation from '@/components/molecules/SubNavigation/SubNavigation.vue';
+import TeamMember from '@/components/molecules/TeamMember/TeamMember.vue';
 
 export default {
   name: 'Page',
   components: {
     SubNavigation,
+    TeamMember,
   },
   computed: {
     ...mapState(['page', 'menus']),
@@ -76,26 +79,27 @@ export default {
 
     featuredImage() {
       if (!this.currentPage.featuredImage) return null;
-      return this.currentPage.featuredImage.source_url;
+      return this.currentPage.featuredImage;
+    },
+
+    teamMember() {
+      if (!this.currentPage.acf.teammember) return null;
+      return this.currentPage.acf.teammember;
     },
   },
   methods: {
-    ...mapActions('page', ['getPage', 'resetPage']),
-    loadData(slug) {
-      this.getPage(slug);
-    },
+    ...mapActions('page', ['loadPageData', 'resetPage']),
   },
 
   beforeRouteUpdate(to, from, next) {
-    this.loadData(to.params.slug);
+    this.loadPageData(to.params.slug);
     next();
   },
 
   mounted() {
-    this.loadData(this.$route.params.slug);
+    this.loadPageData(this.$route.params.slug);
   },
   updated() {
-    console.log(this.page.requestStatus, this.status.error);
     if (this.page.requestStatus === this.status.error) {
       this.$router.push({ name: 'Page', params: { slug: 'not-found' } });
     }
