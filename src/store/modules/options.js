@@ -5,27 +5,29 @@ import requestStatus from '@/data/requestStatus';
 export const namespaced = true;
 
 export const state = {
-  stageElements: {},
+  data: {},
   requestStatus: requestStatus.init,
 };
 
 export const mutations = {
   SET_DATA(state, data) {
-    state.stageElements = data;
+    state.data = data;
   },
-
+  SET_REQUEST_STATUS(state, status) {
+    state.requestStatus = status;
+  },
 };
 
 export const actions = {
-  getStageElements({ commit }) {
+  getOptions({ commit }) {
     return new Promise((resolve, reject) => {
-      acfAPI.getStageElements()
+      acfAPI.getOptions()
         .then((response) => {
           if (response.status !== 200) {
             commit('SET_REQUEST_STATUS', requestStatus.error);
             reject(console.error(response));
           } else {
-            commit('SET_DATA', response.data.stageElements);
+            commit('SET_DATA', response.data);
             resolve();
           }
         })

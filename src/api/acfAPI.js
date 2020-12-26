@@ -6,16 +6,16 @@ import ROUTES from '@/data/routes';
  */
 
 /**
- * Retrieve stageElements
+ * Retrieve options
  *
  * @returns {Promise<AxiosResponse<any>>}
- * @example acfAPI.getStageElements().then((response) => console.log(response));
+ * @example acfAPI.getOptions().then((response) => console.log(response));
  * @author Dominik Niemann <info@dpsg-os.de>
  */
-const getStageElements = () => apiClient.get(`${ROUTES.ACF_API}${ROUTES.OPTIONS.ALL}${ROUTES.OPTIONS.STAGE_ELEMENTS}`);
+const getOptions = () => apiClient.get(`${ROUTES.ACF_API}${ROUTES.OPTIONS.ALL}`);
 
 const exportFunctions = {
-  getStageElements,
+  getOptions,
 };
 
 export default exportFunctions;

@@ -11,7 +11,7 @@
           :style="`background-image: url(${element.stageImage})`"
         >
           <div class="slide-overlay"></div>
-          <div class="slide-body">
+          <div class="slide-body flex-left-center">
             <GridContainer>
               <GridRow>
                 <GridCell width="4">
@@ -34,8 +34,8 @@
                       {{ element.buttonLabel }}
                       <i class="ml-3 fas fa-chevron-right"></i>
                     </button>
-                  </div> </GridCell
-                >x
+                  </div>
+                </GridCell>
               </GridRow>
             </GridContainer>
           </div>
@@ -48,7 +48,7 @@
 <script>
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.min.css';
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Stage',
@@ -58,29 +58,26 @@ export default {
     };
   },
   methods: {
-    ...mapActions('startpage', ['getStageElements']),
     goToPage(slug) {
       this.$router.push({ name: 'Page', params: { slug } });
     },
   },
   computed: {
-    ...mapState(['startpage']),
+    ...mapState(['options']),
     elements() {
-      return this.startpage.stageElements;
+      return this.options.data.acf.stageElements;
     },
   },
   mounted() {
-    this.getStageElements().then(() => {
-      this.slider = new Swiper(this.$refs.swiperContainer, {
-        loop: true,
-        autoplay: {
-          delay: 10000,
-        },
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true,
-        },
-      });
+    this.slider = new Swiper(this.$refs.swiperContainer, {
+      loop: true,
+      autoplay: {
+        delay: 10000,
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
     });
   },
 };
@@ -127,12 +124,6 @@ export default {
   }
 
   &-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: center;
     height: 100%;
     z-index: 2;
     position: relative;

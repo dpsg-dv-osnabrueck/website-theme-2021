@@ -10,7 +10,13 @@
         </GridRow>
         <GridRow>
           <GridCell width="6">
-            <img :src="item.photo" />
+            <div class="card">
+              <div class="card-image">
+                <figure class="image">
+                  <img :src="item.photo" />
+                </figure>
+              </div>
+            </div>
           </GridCell>
           <GridCell width="6">
             <div v-html="item.description"></div>

@@ -19,22 +19,26 @@ export const mutations = {
 };
 
 export const actions = {
+
   getMenus({ commit }) {
-    commit('SET_REQUEST_STATUS', requestStatus.loading);
-    wordpressAPI.getMenu(7)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.error(response);
+    return new Promise((resolve, reject) => {
+      commit('SET_REQUEST_STATUS', requestStatus.loading);
+      wordpressAPI.getMenu(7)
+        .then((response) => {
+          if (response.status !== 200) {
+            commit('SET_REQUEST_STATUS', requestStatus.error);
+            reject(console.error(response));
+          } else {
+            commit('SET_DATA', response.data);
+            commit('SET_REQUEST_STATUS', requestStatus.ready);
+            resolve();
+          }
+        })
+        .catch((error) => {
           commit('SET_REQUEST_STATUS', requestStatus.error);
-        } else {
-          commit('SET_DATA', response.data);
-          commit('SET_REQUEST_STATUS', requestStatus.ready);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        commit('SET_REQUEST_STATUS', requestStatus.error);
-      });
+          reject(console.error(error));
+        });
+    });
   },
 
 };
