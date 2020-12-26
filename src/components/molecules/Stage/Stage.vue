@@ -1,71 +1,105 @@
 <template>
-  <GridContainer>
-    <!-- Slider main container -->
-    <div ref="swiperContainer" class="swiper-container">
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide" v-for="(item, index) of images" :key="index">
-          <div class="slide-content">
-            <div class="slide-body p-6"><slot></slot></div>
-            <div class="slide-overlay"></div>
-            <img :src="item" class="slide-image" />
+  <div ref="swiperContainer" class="swiper-container">
+    <div class="swiper-wrapper">
+      <div
+        class="swiper-slide"
+        v-for="(element, index) of elements"
+        :key="index"
+      >
+        <div
+          class="slide-content"
+          :style="`background-image: url(${element.stageImage})`"
+        >
+          <div class="slide-overlay"></div>
+          <div class="slide-body">
+            <GridContainer>
+              <GridRow>
+                <GridCell width="4">
+                  <Title size="2" subtitle class="has-text-white">
+                    <span subtitle class="has-text-white">
+                      {{ element.stageTitle }}
+                    </span>
+                  </Title>
+                  <Title size="4" subtitle v-if="element.stageSubTitle">
+                    <span subtitle class="has-text-white">
+                      {{ element.stageSubTitle }}
+                    </span>
+                  </Title>
+                  <div
+                    class="buttons mt-6"
+                    v-if="element.buttonLabel && element.buttonLink.post_name"
+                    @click="goToPage(element.buttonLink.post_name)"
+                  >
+                    <button class="button is-primary is-light">
+                      {{ element.buttonLabel }}
+                      <i class="ml-3 fas fa-chevron-right"></i>
+                    </button>
+                  </div> </GridCell
+                >x
+              </GridRow>
+            </GridContainer>
           </div>
         </div>
       </div>
     </div>
-  </GridContainer>
+  </div>
 </template>
 
 <script>
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.min.css';
-import SliderSettings from '@/components/molecules/Stage/SliderSettings';
-import scouts1 from '@/assets/img/scouts1.jpg';
-import scouts2 from '@/assets/img/scouts2.jpg';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Stage',
+  data() {
+    return {
+      slider: null,
+    };
+  },
   methods: {
-    next() {
-      this.slider.slideNext();
-    },
-    prev() {
-      this.slider.slidePrev();
+    ...mapActions('startpage', ['getStageElements']),
+    goToPage(slug) {
+      this.$router.push({ name: 'Page', params: { slug } });
     },
   },
   computed: {
-    images() {
-      return [scouts1, scouts2];
+    ...mapState(['startpage']),
+    elements() {
+      return this.startpage.stageElements;
     },
   },
   mounted() {
-    this.slider = new Swiper(this.$refs.swiperContainer, SliderSettings);
+    this.getStageElements().then(() => {
+      this.slider = new Swiper(this.$refs.swiperContainer, {
+        loop: true,
+        autoplay: {
+          delay: 10000,
+        },
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true,
+        },
+      });
+    });
   },
 };
 </script>
 <style lang="scss" scoped>
 .swiper-container {
   width: 100%;
-  height: 500px;
+  height: 460px;
 }
 .slide {
   &-content {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: center;
+    background-size: cover;
+    height: 100%;
   }
   &-overlay {
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 1;
     height: 100%;
     width: 100%;
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#002343+0,002343+100&1+0,0.6+58,0.3+100 */
@@ -89,19 +123,19 @@ export default {
     ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002343',
     endColorstr='#4d002343',GradientType=1 ); /* IE6-9 */
+    opacity: 0.9;
   }
-  &-image {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    line-height: 0;
-  }
+
   &-body {
-    width: 33.3333333333%;
-    z-index: 3;
-    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+    height: 100%;
+    z-index: 2;
+    position: relative;
   }
 }
 </style>

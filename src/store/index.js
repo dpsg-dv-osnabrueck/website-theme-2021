@@ -7,6 +7,7 @@ import storageNames from '@/data/storageNames';
 import * as i18n from '@/store/modules/i18n';
 import * as menus from '@/store/modules/menus';
 import * as page from '@/store/modules/page';
+import * as startpage from '@/store/modules/startpage';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     i18n,
     menus,
     page,
+    startpage,
   },
 
   mutations: {
