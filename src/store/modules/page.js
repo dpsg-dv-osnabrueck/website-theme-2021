@@ -10,7 +10,6 @@ export const state = {
   currentPage: {},
   subNav: {},
   requestStatus: requestStatus.init,
-  teamImages: {},
 };
 
 export const mutations = {
@@ -19,9 +18,6 @@ export const mutations = {
   },
   SET_FEATURED_IMAGE(state, data) {
     state.currentPage.featuredImage = data;
-  },
-  SET_TEAM_IMAGE(state, data) {
-    state.teamImages[data.name] = data.image;
   },
   SET_SUBNAV(state, data) {
     state.subNav = data;
