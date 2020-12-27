@@ -14,22 +14,30 @@
               </GridCell>
               <GridCell class="has-text-right">
                 <div v-if="!event.oneDayEvent">
-                  <span class="has-text-grey-light">Von:</span>
+                  <span class="has-text-grey-light">
+                    {{ i18n.APP_EVENTS_FROM }}:
+                  </span>
                   {{ transformDate(this.event.startDate) }}
                   {{ event.startTime ? ` - ${event.startTime}` : "" }}
                 </div>
                 <div v-if="!event.oneDayEvent">
-                  <span class="has-text-grey-light">Bis:</span>
+                  <span class="has-text-grey-light">
+                    {{ i18n.APP_EVENTS_TO }}:
+                  </span>
                   {{ transformDate(event.endDate) }}
                   {{ event.endTime ? ` - ${event.endTime}` : "" }}
                 </div>
                 <div v-if="event.oneDayEvent">
                   <div>
-                    <span class="has-text-grey-light">Datum:</span>
+                    <span class="has-text-grey-light">
+                      {{ i18n.APP_EVENTS_DATE }}:
+                    </span>
                     {{ transformDate(this.event.startDate) }}
                   </div>
                   <div v-if="event.startTime">
-                    <span class="has-text-grey-light">Uhrzeit:</span>
+                    <span class="has-text-grey-light">
+                      {{ i18n.APP_EVENTS_TIME }}:
+                    </span>
                     {{ event.startTime ? ` ${event.startTime}` : "" }}
                     {{ event.endTime ? ` - ${event.endTime}` : "" }}
                   </div>
@@ -52,7 +60,9 @@
             </GridRow>
             <GridRow v-if="details">
               <GridCell>
-                <Title size="6" class="mb-2">Details:</Title>
+                <Title size="6" class="mb-2">
+                  {{ i18n.APP_EVENTS_DETAILS }}:
+                </Title>
                 <div v-html="event.eventInformation" class="mb-4"></div>
                 <a
                   v-if="event.internalLink"
@@ -85,6 +95,7 @@
 
 <script>
 import dateHelper from '@/helper/dateHelper';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EventEntry',
@@ -105,6 +116,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters('i18n', ['i18n']),
     noDetails() {
       return !this.event.eventInformation && !this.event.internalLink && !this.event.externalLink;
     },
