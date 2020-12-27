@@ -15,7 +15,9 @@
         <div v-html="teaser.teaserText"></div>
         <div
           class="buttons mt-5"
-          @click="goToPage(teaser.teaserLink.post_name)"
+          @click="
+            goToPage(teaser.teaserLink.post_name, teaser.teaserLink.post_type)
+          "
         >
           <button class="button is-primary">
             {{ teaser.teaserLinkLabel }}
@@ -42,8 +44,8 @@ export default {
     },
   },
   methods: {
-    goToPage(slug) {
-      this.$router.push({ name: 'Page', params: { slug } });
+    goToPage(slug, type) {
+      this.$router.push({ name: type, params: { slug } });
     },
   },
 };

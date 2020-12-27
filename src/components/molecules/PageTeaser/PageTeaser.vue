@@ -47,7 +47,12 @@
                       class="mb-5 content"
                     ></div>
                     <a
-                      @click="goToPage(item.topicPage.post_name)"
+                      @click="
+                        goToPage(
+                          item.topicPage.post_name,
+                          item.topicPage.post_type
+                        )
+                      "
                       target="_blank"
                     >
                       <button class="button is-primary">
@@ -121,8 +126,8 @@ export default {
       }
     },
 
-    goToPage(slug) {
-      this.$router.push({ name: 'Page', params: { slug } });
+    goToPage(slug, type) {
+      this.$router.push({ name: type, params: { slug } });
     },
   },
   mounted() {

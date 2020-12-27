@@ -5,7 +5,7 @@
       <li
         v-for="(item, index) of items"
         :key="index"
-        @click="goToPage(item.object_slug)"
+        @click="goToPage(item.object_slug, item.object)"
       >
         <a :class="{ 'is-active': activePage === item.object_slug }">
           {{ item.title }}
@@ -35,8 +35,8 @@ export default {
     },
   },
   methods: {
-    goToPage(slug) {
-      this.$router.push({ name: 'Page', params: { slug } });
+    goToPage(slug, type) {
+      this.$router.push({ name: type, params: { slug } });
     },
   },
 };

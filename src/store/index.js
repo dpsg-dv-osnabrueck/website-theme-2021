@@ -8,6 +8,7 @@ import requestStatus from '@/data/requestStatus';
 import * as i18n from '@/store/modules/i18n';
 import * as menus from '@/store/modules/menus';
 import * as page from '@/store/modules/page';
+import * as post from '@/store/modules/post';
 import * as options from '@/store/modules/options';
 import * as instagram from '@/store/modules/instagram';
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     i18n,
     menus,
     page,
+    post,
     options,
     instagram,
   },

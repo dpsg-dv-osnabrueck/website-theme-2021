@@ -23,4 +23,5 @@ export default {
   APP_INSTAGRAM_TITLE: 'Neuste Instagram posts',
   APP_INSTAGRAM_LABEL: 'Auf Instagram angucken',
   APP_PAGE_TEASER_TITLE: 'Aktuelle Themen',
+  APP_EVENTS_TITLE: 'Termine',
 };

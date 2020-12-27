@@ -1,7 +1,7 @@
 <template>
   <div class="my-6">
     <GridContainer>
-      <div v-if="page.requestStatus === status.ready">
+      <div v-if="post.requestStatus === status.ready">
         <GridRow isCentered>
           <GridCell :width="{ tablet: 8, widescreen: 6 }">
             <div v-if="featuredImage" class="featuredImage mb-6">
@@ -18,18 +18,10 @@
               <Title class="mb-2">{{ title }}</Title>
             </div>
             <div v-html="content" class="content"></div>
-            <TeamMember :data="teamMember" v-if="teamMember" />
-          </GridCell>
-          <GridCell :width="{ tablet: 3, widescreen: 2 }" v-if="subNav">
-            <SubNavigation
-              :data="subNav"
-              :activePage="currentPage.slug"
-              v-if="subNav.children"
-            />
           </GridCell>
         </GridRow>
       </div>
-      <div v-if="page.requestStatus === status.loading">
+      <div v-if="post.requestStatus === status.loading">
         <GridRow isCentered>
           <GridCell :width="{ tablet: 8, widescreen: 6 }">
             <progress
@@ -46,63 +38,43 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import requestStatus from '@/data/requestStatus';
-import SubNavigation from '@/components/molecules/SubNavigation/SubNavigation.vue';
-import TeamMember from '@/components/molecules/TeamMember/TeamMember.vue';
 
 export default {
-  name: 'Page',
-  components: {
-    SubNavigation,
-    TeamMember,
-  },
+  name: 'Post',
   computed: {
-    ...mapState(['page', 'menus']),
+    ...mapState(['post']),
     status() {
       return requestStatus;
     },
 
-    currentPage() {
-      return this.page.currentPage;
+    currentPost() {
+      return this.post.currentPost;
     },
 
     content() {
-      return this.currentPage.content.rendered;
+      return this.currentPost.content.rendered;
     },
 
     title() {
-      return this.currentPage.title.rendered;
-    },
-
-    subNav() {
-      return this.page.subNav;
+      return this.currentPost.title.rendered;
     },
 
     featuredImage() {
-      if (!this.currentPage.featuredImage) return null;
-      return this.currentPage.featuredImage;
-    },
-
-    teamMember() {
-      if (!this.currentPage.acf.teammember) return null;
-      return this.currentPage.acf.teammember;
+      if (!this.currentPost.featuredImage) return null;
+      return this.currentPost.featuredImage;
     },
   },
   methods: {
-    ...mapActions('page', ['loadPageData', 'resetPage']),
+    ...mapActions('post', ['loadPostData']),
   },
 
   beforeRouteUpdate(to, from, next) {
-    this.loadPageData(to.params.slug);
+    this.loadPostData(to.params.slug);
     next();
   },
 
   mounted() {
-    this.loadPageData(this.$route.params.slug);
-  },
-  updated() {
-    if (this.page.requestStatus === this.status.error) {
-      this.$router.push({ name: 'page', params: { slug: 'not-found' } });
-    }
+    this.loadPostData(this.$route.params.slug);
   },
 };
 </script>

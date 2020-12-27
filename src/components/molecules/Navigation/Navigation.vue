@@ -39,7 +39,10 @@
               v-for="(item, index) of menuItems"
               :key="index"
             >
-              <span v-if="!item.children" @click="goToPage(item.object_slug)">
+              <span
+                v-if="!item.children"
+                @click="goToPage(item.object_slug, item.object, item.url)"
+              >
                 {{ item.title }}
               </span>
               <a v-if="item.children" class="navbar-link" :title="item.title">
@@ -51,7 +54,9 @@
                   :key="subIndex"
                   class="navbar-item"
                   :title="subItem.title"
-                  @click="goToPage(subItem.object_slug)"
+                  @click="
+                    goToPage(subItem.object_slug, subItem.object, subItem.url)
+                  "
                 >
                   {{ subItem.title }}
                 </a>
@@ -97,6 +102,7 @@
 <script>
 import logo from '@/assets/img/logo.svg';
 import { mapGetters, mapState } from 'vuex';
+import regex from '@/data/regex';
 
 export default {
   name: 'Navigation',
@@ -127,8 +133,14 @@ export default {
       this.isActive = !this.isActive;
     },
 
-    goToPage(slug) {
-      this.$router.push({ name: 'Page', params: { slug } });
+    goToPage(slug, type, url) {
+      if (type === 'custom' && url.match(regex.routerLink)) {
+        this.$router.push({ name: url.split('.')[1] });
+      }
+
+      if (type === 'custom') return;
+
+      this.$router.push({ name: type, params: { slug } });
     },
 
     goHome() {

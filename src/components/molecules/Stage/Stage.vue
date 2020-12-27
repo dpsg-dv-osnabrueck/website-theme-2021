@@ -28,7 +28,12 @@
                   <div
                     class="buttons mt-6"
                     v-if="element.buttonLabel && element.buttonLink.post_name"
-                    @click="goToPage(element.buttonLink.post_name)"
+                    @click="
+                      goToPage(
+                        element.buttonLink.post_name,
+                        element.buttonLink.post_type
+                      )
+                    "
                   >
                     <button class="button is-primary is-light">
                       {{ element.buttonLabel }}
@@ -58,8 +63,8 @@ export default {
     };
   },
   methods: {
-    goToPage(slug) {
-      this.$router.push({ name: 'Page', params: { slug } });
+    goToPage(slug, type) {
+      this.$router.push({ name: type, params: { slug } });
     },
   },
   computed: {
