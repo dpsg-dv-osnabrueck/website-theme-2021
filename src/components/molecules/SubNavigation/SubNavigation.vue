@@ -31,7 +31,6 @@ export default {
     },
 
     isActive() {
-      console.log(this.activePage, this.data.object_slug);
       return this.activePage === this.data.object_slug;
     },
   },

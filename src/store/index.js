@@ -9,6 +9,7 @@ import * as i18n from '@/store/modules/i18n';
 import * as menus from '@/store/modules/menus';
 import * as page from '@/store/modules/page';
 import * as options from '@/store/modules/options';
+import * as instagram from '@/store/modules/instagram';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     menus,
     page,
     options,
+    instagram,
   },
 
   mutations: {

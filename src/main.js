@@ -13,6 +13,7 @@ import store from './store';
 import '@/assets/styles/main.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@/assets/styles/block-library.min.css';
+import 'swiper/swiper-bundle.min.css';
 
 Vue.component('GridContainer', GridContainer);
 Vue.component('GridRow', GridRow);

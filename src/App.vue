@@ -33,7 +33,7 @@ export default {
     Footer,
   },
   computed: {
-    ...mapState(['requestStatus']),
+    ...mapState(['requestStatus', 'instagram']),
     ...mapGetters('i18n', ['i18n']),
     status() {
       return requestStatus;

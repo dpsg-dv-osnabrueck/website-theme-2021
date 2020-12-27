@@ -47,7 +47,7 @@
 
 <script>
 import Swiper from 'swiper/bundle';
-import 'swiper/swiper-bundle.min.css';
+
 import { mapState } from 'vuex';
 
 export default {

@@ -22,4 +22,11 @@ export default {
     ALL: '/options/options',
     STAGE_ELEMENTS: '/stageElements',
   },
+  INSTAGRAM: {
+    BASE: 'https://graph.instagram.com',
+    FEED: '/me/media',
+    REFRESH: '/refresh_access_token',
+    PARAMS: ['?grant_type=ig_refresh_token', '&access_token='],
+  },
+
 };

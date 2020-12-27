@@ -20,4 +20,7 @@ export default {
   APP_SOCIAL_INSTAGRAM_URL: 'https://www.instagram.com/dpsgos/',
   APP_PAGE_SUB_NAV_TITLE: 'Navigation',
   APP_PAGE_TEAM_WRITE_MAIL: 'Schreibe $NAME$ eine Mail',
+  APP_INSTAGRAM_TITLE: 'Neuste Instagram posts',
+  APP_INSTAGRAM_LABEL: 'Auf Instagram angucken',
+  APP_PAGE_TEASER_TITLE: 'Aktuelle Themen',
 };
