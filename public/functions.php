@@ -5,6 +5,7 @@ function registerMainNav() {
   register_nav_menus(
     array(
       'main_navigation' => __( 'Main Navigation' ),
+      'footer_nav' => __( 'Footer Navigation' )
     )
   );
 }
@@ -37,6 +38,30 @@ if( function_exists('acf_add_options_page') ) {
       'page_title' 	=> 'Startseite',
       'menu_title' 	=> 'Startseite',
       'menu_slug' 	=> 'startpage',
+      'capability' 	=> 'edit_posts',
+      'redirect' 	=> false
+  ));
+
+}
+
+if( function_exists('acf_add_options_page') ) {
+
+  $page = acf_add_options_page(array(
+      'page_title' 	=> 'Instagram',
+      'menu_title' 	=> 'Instagram',
+      'menu_slug' 	=> 'instagram',
+      'capability' 	=> 'edit_posts',
+      'redirect' 	=> false
+  ));
+
+}
+
+if( function_exists('acf_add_options_page') ) {
+
+  $page = acf_add_options_page(array(
+      'page_title' 	=> 'Termine',
+      'menu_title' 	=> 'Termine',
+      'menu_slug' 	=> 'termine',
       'capability' 	=> 'edit_posts',
       'redirect' 	=> false
   ));
