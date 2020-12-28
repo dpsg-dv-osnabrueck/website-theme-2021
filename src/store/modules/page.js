@@ -61,7 +61,7 @@ export const actions = {
   },
 
   setSubNav({ commit, rootState }, slug) {
-    const { items } = rootState.menus.menus;
+    const { items } = rootState.menus.mainNavigation;
     const navItems = [];
 
     if (!items) return;

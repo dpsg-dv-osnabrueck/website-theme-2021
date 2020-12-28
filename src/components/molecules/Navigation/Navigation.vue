@@ -41,21 +41,29 @@
             >
               <span
                 v-if="!item.children"
-                @click="goToPage(item.object_slug, item.object, item.url)"
+                @click="openPage(item.object_slug, item.object, item.url)"
               >
                 {{ item.title }}
               </span>
-              <a v-if="item.children" class="navbar-link" :title="item.title">
+              <a
+                v-if="item.children"
+                class="navbar-link"
+                :title="item.title"
+                @click="isActiveSub[item.id] = !isActiveSub[item.id]"
+              >
                 {{ item.title }}
               </a>
-              <div v-if="item.children" class="navbar-dropdown">
+              <div
+                v-if="item.children && isActiveSub[item.id]"
+                class="navbar-dropdown"
+              >
                 <a
                   v-for="(subItem, subIndex) of item.children"
                   :key="subIndex"
                   class="navbar-item"
                   :title="subItem.title"
                   @click="
-                    goToPage(subItem.object_slug, subItem.object, subItem.url)
+                    openPage(subItem.object_slug, subItem.object, subItem.url)
                   "
                 >
                   {{ subItem.title }}
@@ -102,23 +110,25 @@
 <script>
 import logo from '@/assets/img/logo.svg';
 import { mapGetters, mapState } from 'vuex';
-import regex from '@/data/regex';
+import goToPage from '@/mixins/goToPage';
 
 export default {
   name: 'Navigation',
+  mixins: [goToPage],
   data() {
     return {
       isActive: false,
+      isActiveSub: {},
     };
   },
   computed: {
-    ...mapState('menus', ['menus']),
+    ...mapState('menus', ['mainNavigation']),
     ...mapGetters('i18n', ['i18n']),
     logo() {
       return logo;
     },
     menuItems() {
-      return this.menus.items;
+      return this.mainNavigation.items;
     },
   },
   methods: {
@@ -133,19 +143,27 @@ export default {
       this.isActive = !this.isActive;
     },
 
-    goToPage(slug, type, url) {
-      if (type === 'custom' && url.match(regex.routerLink)) {
-        this.$router.push({ name: url.split('.')[1] });
-      }
-
-      if (type === 'custom') return;
-
-      this.$router.push({ name: type, params: { slug } });
-    },
-
     goHome() {
       this.$router.push({ name: 'Home' });
     },
+
+    setIds() {
+      const ids = {};
+      this.menuItems.forEach((item) => {
+        if (item.children) {
+          ids[item.id] = false;
+        }
+      });
+      return ids;
+    },
+
+    openPage(slug, type, url) {
+      this.toggleMenu();
+      this.goToPage(slug, type, url);
+    },
+  },
+  mounted() {
+    this.isActiveSub = this.setIds();
   },
 };
 </script>

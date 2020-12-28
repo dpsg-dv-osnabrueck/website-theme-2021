@@ -12,7 +12,7 @@
         >
           <div class="slide-overlay"></div>
           <div class="slide-body flex-left-center">
-            <GridContainer>
+            <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
               <GridRow>
                 <GridCell width="4">
                   <Title size="2" subtitle class="has-text-white">
@@ -52,20 +52,17 @@
 
 <script>
 import Swiper from 'swiper/bundle';
-
+import goToPage from '@/mixins/goToPage';
 import { mapState } from 'vuex';
+import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'Stage',
+  mixins: [goToPage, MediaQueries],
   data() {
     return {
       slider: null,
     };
-  },
-  methods: {
-    goToPage(slug, type) {
-      this.$router.push({ name: type, params: { slug } });
-    },
   },
   computed: {
     ...mapState(['options']),

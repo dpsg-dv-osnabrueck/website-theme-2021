@@ -31,9 +31,11 @@
 
 <script>
 import { mapState } from 'vuex';
+import goToPage from '@/mixins/goToPage';
 
 export default {
   name: 'StartpageTeaser',
+  mixins: [goToPage],
   computed: {
     ...mapState(['options']),
     teaser() {
@@ -41,11 +43,6 @@ export default {
     },
     image() {
       return this.teaser.teaserImage.sizes.front_news;
-    },
-  },
-  methods: {
-    goToPage(slug, type) {
-      this.$router.push({ name: type, params: { slug } });
     },
   },
 };

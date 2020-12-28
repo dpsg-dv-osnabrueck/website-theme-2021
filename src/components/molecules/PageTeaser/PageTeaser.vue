@@ -70,18 +70,24 @@
     </div>
     <GridContainer>
       <GridRow>
-        <GridCell>
+        <GridCell class="has-text-center">
           <a
             @click="prev"
             class="mr-6"
             :class="{ 'has-text-grey-light': !prevActive }"
           >
-            <i class="ml-3 fas fa-chevron-left"> </i>
-            Vorheriges Thema
+            <i
+              :class="`ml-3 fas fa-chevron-left${mq.small.is ? ' fa-2x' : ''}`"
+            >
+            </i>
+            {{ !mq.small.is ? i18n.APP_PAGE_TEASER_PREV : "" }}
           </a>
           <a @click="next" :class="{ 'has-text-grey-light': !nextActive }">
-            Nächstes Thema
-            <i class="ml-3 fas fa-chevron-right"> </i>
+            {{ !mq.small.is ? i18n.APP_PAGE_TEASER_NEXT : "" }}
+            <i
+              :class="`ml-3 fas fa-chevron-right${mq.small.is ? ' fa-2x' : ''}`"
+            >
+            </i>
           </a>
         </GridCell>
       </GridRow>
@@ -92,9 +98,12 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import Swiper from 'swiper/bundle';
+import goToPage from '@/mixins/goToPage';
+import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'PageTeaser',
+  mixins: [goToPage, MediaQueries],
   data() {
     return {
       slider: null,
@@ -124,10 +133,6 @@ export default {
       if (this.prevActive) {
         this.slider.slidePrev();
       }
-    },
-
-    goToPage(slug, type) {
-      this.$router.push({ name: type, params: { slug } });
     },
   },
   mounted() {

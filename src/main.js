@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vue2TouchEvents from 'vue2-touch-events';
 import storageHelper from '@/helper/storageHelper';
 import storageNames from '@/data/storageNames';
 import { mapActions } from 'vuex';
@@ -19,6 +20,8 @@ Vue.component('GridContainer', GridContainer);
 Vue.component('GridRow', GridRow);
 Vue.component('GridCell', GridCell);
 Vue.component('Title', Title);
+
+Vue.use(Vue2TouchEvents);
 
 Vue.config.productionTip = false;
 

@@ -5,7 +5,7 @@
       <li
         v-for="(item, index) of items"
         :key="index"
-        @click="goToPage(item.object_slug, item.object)"
+        @click="goToPage(item.object_slug, item.object, item.url)"
       >
         <a :class="{ 'is-active': activePage === item.object_slug }">
           {{ item.title }}
@@ -17,9 +17,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import goToPage from '@/mixins/goToPage';
 
 export default {
   name: 'SubNavigation',
+  mixins: [goToPage],
   props: {
     data: Object,
     activePage: String,
@@ -32,11 +34,6 @@ export default {
 
     isActive() {
       return this.activePage === this.data.object_slug;
-    },
-  },
-  methods: {
-    goToPage(slug, type) {
-      this.$router.push({ name: type, params: { slug } });
     },
   },
 };

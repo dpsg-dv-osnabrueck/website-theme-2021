@@ -1,5 +1,5 @@
 <template>
-  <GridContainer class="my-6">
+  <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
     <GridRow isCentered class="mb-4">
       <GridCell width="8">
         <Title size="2">{{ i18n.APP_EVENTS_TITLE }}</Title>
@@ -13,9 +13,11 @@
 import { mapGetters, mapState } from 'vuex';
 import EventEntry from '@/components/molecules/EventEntry/EventEntry.vue';
 import { sortBy } from 'lodash';
+import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'Events',
+  mixins: [MediaQueries],
   components: {
     EventEntry,
   },

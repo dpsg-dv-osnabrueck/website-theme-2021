@@ -12,7 +12,7 @@
                   {{ event.eventTitle }}
                 </Title>
               </GridCell>
-              <GridCell class="has-text-right">
+              <GridCell class="has-text-right-tablet">
                 <div v-if="!event.oneDayEvent">
                   <span class="has-text-grey-light">
                     {{ i18n.APP_EVENTS_FROM }}:
