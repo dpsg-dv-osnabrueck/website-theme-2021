@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import requestStatus from '@/data/requestStatus';
 import SubNavigation from '@/components/molecules/SubNavigation/SubNavigation.vue';
 import SubNavigationMobile from '@/components/molecules/SubNavigation/SubNavigationMobile.vue';
@@ -88,6 +88,7 @@ export default {
   },
   computed: {
     ...mapState(['page', 'menus']),
+    ...mapGetters('i18n', ['i18n']),
     status() {
       return requestStatus;
     },
@@ -133,15 +134,25 @@ export default {
   },
   methods: {
     ...mapActions('page', ['loadPageData', 'resetPage']),
+
+    setTitle() {
+      document.title = `${this.i18n.APP_TITLE} - ${this.currentPage.title.rendered}`;
+    },
+
+    loadPage(slug) {
+      this.loadPageData(slug).then(() => {
+        this.setTitle();
+      });
+    },
   },
 
   beforeRouteUpdate(to, from, next) {
-    this.loadPageData(to.params.slug);
+    this.loadPage(to.params.slug);
     next();
   },
 
   mounted() {
-    this.loadPageData(this.$route.params.slug);
+    this.loadPage(this.$route.params.slug);
   },
   updated() {
     if (this.page.requestStatus === this.status.error) {

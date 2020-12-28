@@ -101,11 +101,14 @@ export const actions = {
 
   loadPageData({ commit, dispatch }, slug) {
     commit('SET_REQUEST_STATUS', requestStatus.loading);
-    dispatch('resetPage');
-    dispatch('getPage', slug).then(() => {
-      dispatch('setSubNav', state.currentPage.slug);
-      dispatch('getFeaturedImage').then(() => {
-        commit('SET_REQUEST_STATUS', requestStatus.ready);
+    return new Promise((resolve) => {
+      dispatch('resetPage');
+      dispatch('getPage', slug).then(() => {
+        dispatch('setSubNav', state.currentPage.slug);
+        dispatch('getFeaturedImage').then(() => {
+          commit('SET_REQUEST_STATUS', requestStatus.ready);
+          resolve();
+        });
       });
     });
   },

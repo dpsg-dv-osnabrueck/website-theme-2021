@@ -1,5 +1,8 @@
 <template>
-  <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
+  <GridContainer
+    :class="`my-6${mq.small.is ? ' px-3' : ''}`"
+    ref="contentContainer"
+  >
     <GridRow isCentered class="mb-4">
       <GridCell width="8">
         <Title size="2">{{ i18n.APP_EVENTS_TITLE }}</Title>
@@ -27,6 +30,14 @@ export default {
     events() {
       return sortBy(this.options.data.acf.events.eventList, ['startDate']);
     },
+  },
+  methods: {
+    setTitle() {
+      document.title = `${this.i18n.APP_TITLE} - ${this.i18n.APP_EVENTS_TITLE}`;
+    },
+  },
+  mounted() {
+    this.setTitle();
   },
 };
 </script>

@@ -88,15 +88,25 @@ export default {
   },
   methods: {
     ...mapActions('post', ['loadPostData']),
+
+    setTitle() {
+      document.title = `${this.i18n.APP_TITLE} - ${this.currentPost.title.rendered}`;
+    },
+
+    loadPost(slug) {
+      this.loadPageData(slug).then(() => {
+        this.setTitle();
+      });
+    },
   },
 
   beforeRouteUpdate(to, from, next) {
-    this.loadPostData(to.params.slug);
+    this.loadPost(to.params.slug);
     next();
   },
 
   mounted() {
-    this.loadPostData(this.$route.params.slug);
+    this.loadPost(this.$route.params.slug);
   },
 };
 </script>

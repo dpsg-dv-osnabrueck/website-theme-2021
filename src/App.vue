@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div ref="appRoot">
     <div v-if="status.ready === requestStatus">
       <Navigation />
-      <router-view />
+      <div ref="rootContent">
+        <router-view />
+      </div>
       <Footer />
     </div>
     <div v-else>
@@ -42,8 +44,20 @@ export default {
   methods: {
     ...mapActions(['initializePage']),
     setTitle() {
-      if (this.$router.history.current.name) {
-        document.title = `${this.i18n.APP_TITLE} - ${this.$router.history.current.name}`;
+      document.title = `${this.i18n.APP_TITLE}`;
+    },
+    setAppHeight() {
+      const { rootContent } = this.$refs;
+
+      if (rootContent) {
+        const windowHeight = window.innerHeight;
+        const appHeight = this.$refs.appRoot.clientHeight;
+        const offset = windowHeight - appHeight;
+        const newContentHeight = windowHeight - offset;
+
+        if (offset > 0) {
+          rootContent.setAttribute('style', `min-height:${newContentHeight}px`);
+        }
       }
     },
   },
@@ -52,6 +66,7 @@ export default {
     this.initializePage();
   },
   updated() {
+    this.setAppHeight();
     this.setTitle();
   },
 };
