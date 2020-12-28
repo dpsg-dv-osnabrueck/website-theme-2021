@@ -3,28 +3,37 @@
     <div v-for="(item, index) of data" :key="index">
       <div class="card mb-3">
         <div class="card-content">
-          <Title size="5" class="mb-2">
-            {{ item.tribe }}
-          </Title>
-          <Title size="6" subtitle class="mb-2">
-            <span class="has-text-grey">
-              {{ item.street ? `${item.street},` : "" }}
-              {{ item.zip }}
-              {{ item.city }}
-            </span>
-          </Title>
-          <div v-if="item.url" class="mb-2">
-            <i class="fas fa-home"></i>
-            <a :href="item.url">
-              {{ i18n.APP_PAGE_TRIBE_WEBSITE }}
-            </a>
-          </div>
-          <div v-if="item.email">
-            <i class="far fa-envelope"></i>
-            <a :href="`mailto:${item.email}`">
-              {{ replaceString(i18n.APP_PAGE_TRIBE_MAIL_LABEL, item.tribe) }}
-            </a>
-          </div>
+          <GridRow vCentered isMobile>
+            <GridCell :width="{ mobile: 4, tablet: 2 }" v-if="item.logo">
+              <img :src="item.logo.sizes.gallery_overview" />
+            </GridCell>
+            <GridCell>
+              <Title size="5" class="mb-2">
+                {{ item.tribe }}
+              </Title>
+              <Title size="6" subtitle class="mb-2">
+                <span class="has-text-grey">
+                  {{ item.street ? `${item.street},` : "" }}
+                  {{ item.zip }}
+                  {{ item.city }}
+                </span>
+              </Title>
+              <div v-if="item.url" class="mb-2">
+                <i class="fas fa-home"></i>
+                <a :href="item.url">
+                  {{ i18n.APP_PAGE_TRIBE_WEBSITE }}
+                </a>
+              </div>
+              <div v-if="item.email">
+                <i class="far fa-envelope"></i>
+                <a :href="`mailto:${item.email}`">
+                  {{
+                    replaceString(i18n.APP_PAGE_TRIBE_MAIL_LABEL, item.tribe)
+                  }}
+                </a>
+              </div>
+            </GridCell>
+          </GridRow>
         </div>
       </div>
     </div>
