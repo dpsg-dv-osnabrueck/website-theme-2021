@@ -113,11 +113,10 @@
 import logo from '@/assets/img/logo.svg';
 import { mapGetters, mapState } from 'vuex';
 import goToPage from '@/mixins/goToPage';
-import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'Navigation',
-  mixins: [goToPage, MediaQueries],
+  mixins: [goToPage],
   data() {
     return {
       isActive: false,
@@ -187,5 +186,26 @@ export default {
 @import "@/assets/styles/main";
 .nav-container {
   border-bottom: 2px solid $red;
+}
+
+.navbar {
+  .navbar-end,
+  .navbar-start {
+    .has-dropdown {
+      &.is-active {
+        .navbar-link {
+          &:after {
+            transition: transform 0.2s ease-out;
+            transform: rotate(135deg);
+          }
+        }
+      }
+      .navbar-link {
+        &:after {
+          transition: transform 0.2s ease-out;
+        }
+      }
+    }
+  }
 }
 </style>
