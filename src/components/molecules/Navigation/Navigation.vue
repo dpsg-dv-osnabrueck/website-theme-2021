@@ -82,7 +82,7 @@
                   :href="i18n.APP_SOCIAL_INSTAGRAM_URL"
                   target="_blank"
                 >
-                  <i class="fab fa-instagram"></i>
+                  <Icon name="instagram" fab />
                 </a>
                 <a
                   class="button is-primary"
@@ -90,7 +90,7 @@
                   :href="i18n.APP_SOCIAL_TWITTER_URL"
                   target="_blank"
                 >
-                  <i class="fab fa-twitter"></i>
+                  <Icon name="twitter" fab />
                 </a>
                 <a
                   class="button is-primary"
@@ -98,7 +98,7 @@
                   :href="i18n.APP_SOCIAL_FACEBOOK_URL"
                   target="_blank"
                 >
-                  <i class="fab fa-facebook-square"></i>
+                  <Icon name="facebook-square" fab />
                 </a>
               </div>
             </div>
