@@ -72,7 +72,7 @@ export default {
   },
   mounted() {
     this.slider = new Swiper(this.$refs.swiperContainer, {
-      loop: true,
+      loop: this.elements > 1,
       autoplay: {
         delay: 10000,
       },

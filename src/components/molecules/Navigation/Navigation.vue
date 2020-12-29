@@ -13,7 +13,7 @@
             :title="i18n.APP_TITLE"
             @click="goHome"
           >
-            <img :src="logo" width="48" height="48" :alt="i18n.APP_TITLE" />
+            <img :src="logo" :alt="i18n.APP_TITLE" />
           </a>
           <a
             role="button"
@@ -35,7 +35,9 @@
         >
           <div class="navbar-start">
             <a
-              :class="navItemClasses(item.children)"
+              :class="`${navItemClasses(item.children)} ${
+                isActiveSub[item.id] ? 'is-active' : ''
+              }`"
               v-for="(item, index) of menuItems"
               :key="index"
             >
@@ -49,13 +51,13 @@
                 v-if="item.children"
                 class="navbar-link"
                 :title="item.title"
-                @click="isActiveSub[item.id] = !isActiveSub[item.id]"
+                @click="toggleDropDown(item.id)"
               >
                 {{ item.title }}
               </a>
               <div
                 v-if="item.children && isActiveSub[item.id]"
-                class="navbar-dropdown"
+                class="navbar-dropdown is-boxed"
               >
                 <a
                   v-for="(subItem, subIndex) of item.children"
@@ -111,10 +113,11 @@
 import logo from '@/assets/img/logo.svg';
 import { mapGetters, mapState } from 'vuex';
 import goToPage from '@/mixins/goToPage';
+import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'Navigation',
-  mixins: [goToPage],
+  mixins: [goToPage, MediaQueries],
   data() {
     return {
       isActive: false,
@@ -135,12 +138,24 @@ export default {
     navItemClasses(children) {
       const classes = [];
       classes.push('navbar-item');
-      if (children) classes.push('has-dropdown is-hoverable');
+      if (children) classes.push('has-dropdown');
       return classes.join(' ');
     },
 
     toggleMenu() {
       this.isActive = !this.isActive;
+    },
+
+    toggleDropDown(id) {
+      const currentToggle = this.isActiveSub[id];
+      this.closeDropDown();
+      this.isActiveSub[id] = !currentToggle;
+    },
+
+    closeDropDown() {
+      Object.keys(this.isActiveSub).forEach((item) => {
+        this.isActiveSub[item] = false;
+      });
     },
 
     goHome() {
@@ -158,6 +173,7 @@ export default {
     },
 
     openPage(slug, type, url) {
+      this.closeDropDown();
       this.toggleMenu();
       this.goToPage(slug, type, url);
     },
