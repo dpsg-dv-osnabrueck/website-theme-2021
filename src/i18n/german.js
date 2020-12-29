@@ -16,6 +16,7 @@ export default {
   APP_SOCIAL_TWITTER_URL: 'https://twitter.com/DPSG_OS',
   APP_SOCIAL_INSTAGRAM: 'Instagram',
   APP_SOCIAL_INSTAGRAM_URL: 'https://www.instagram.com/dpsgos/',
+  APP_SOCIAL_INSTAGRAM_CTA: 'Folge @dpsgos auf Instagram',
   APP_PAGE_SUB_NAV_TITLE: 'Navigation',
   APP_PAGE_TEAM_WRITE_MAIL: 'Schreibe $NAME$ eine Mail',
   APP_PAGE_TRIBE_MAIL_LABEL: 'Schreibe Stamm $TRIBE$ eine Mail',

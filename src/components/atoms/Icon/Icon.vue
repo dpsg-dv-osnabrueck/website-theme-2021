@@ -1,8 +1,9 @@
 <template>
   <i
-    :class="`fas fa-${name}${size ? ` fa-${size}x` : ''}`"
+    :class="`${!fab ? 'fas' : 'fab'} fa-${name}${size ? ` fa-${size}x` : ''}`"
     @click="$emit('click')"
-  ></i>
+  >
+  </i>
 </template>
 
 <script>
@@ -11,6 +12,7 @@ export default {
   props: {
     name: String,
     size: Number,
+    fab: Boolean,
   },
 };
 </script>

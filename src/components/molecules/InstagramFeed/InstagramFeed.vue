@@ -41,6 +41,17 @@
           </div>
         </GridCell>
       </GridRow>
+      <GridRow>
+        <GridCell>
+          <div class="buttons is-centered">
+            <a :href="i18n.APP_SOCIAL_INSTAGRAM_URL" target="_blank">
+              <Button isOutlined fab iconName="instagram">{{
+                i18n.APP_SOCIAL_INSTAGRAM_CTA
+              }}</Button>
+            </a>
+          </div>
+        </GridCell>
+      </GridRow>
     </GridContainer>
 
     <GridContainer v-else>

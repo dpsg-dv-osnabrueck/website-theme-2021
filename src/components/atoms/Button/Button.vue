@@ -1,11 +1,11 @@
 <template>
   <button :class="classes" :disabled="disabled" @click="$emit('click')">
     <span class="icon" v-if="iconName && !iconRight">
-      <i :class="`fas fa-${iconName}`"></i>
+      <Icon :name="iconName" :fab="fab" />
     </span>
     <span><slot></slot></span>
     <span class="icon" v-if="iconName && iconRight">
-      <i :class="`fas fa-${iconName}`"></i>
+      <Icon :name="iconName" :fab="fab" />
     </span>
   </button>
 </template>
@@ -25,6 +25,7 @@ export default {
     disabled: Boolean,
     iconName: String,
     iconRight: Boolean,
+    fab: Boolean,
   },
   data() {
     return {
