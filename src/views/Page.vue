@@ -143,6 +143,7 @@ export default {
     },
 
     loadPage(slug) {
+      this.resetPage();
       this.loadPageData(slug).then(() => {
         this.setTitle();
       });
@@ -154,6 +155,11 @@ export default {
     next();
   },
 
+  beforeRouteLeave(to, from, next) {
+    this.resetPage();
+    next();
+  },
+
   mounted() {
     this.loadPage(this.$route.params.slug);
   },
@@ -162,6 +168,10 @@ export default {
     if (this.page.requestStatus === this.status.error) {
       this.$router.push({ name: 'page', params: { slug: 'not-found' } });
     }
+  },
+
+  unmounted() {
+    this.resetPage();
   },
 };
 </script>
