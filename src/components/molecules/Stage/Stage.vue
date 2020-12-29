@@ -6,21 +6,27 @@
         v-for="(element, index) of elements"
         :key="index"
       >
-        <div
-          class="slide-content"
-          :style="`background-image: url(${element.stageImage})`"
-        >
+        <div class="slide-content">
+          <div
+            :class="`slide-image ${isInit ? 'isInit' : 'isNotInit'}`"
+            :style="`background-image: url(${element.stageImage})`"
+          ></div>
           <div class="slide-overlay"></div>
           <div class="slide-body flex-left-center">
             <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
               <GridRow>
                 <GridCell width="4">
-                  <Title size="2" subtitle class="has-text-white">
+                  <Title size="2" subtitle class="has-text-white textShadow">
                     <span subtitle class="has-text-white">
                       {{ element.stageTitle }}
                     </span>
                   </Title>
-                  <Title size="4" subtitle v-if="element.stageSubTitle">
+                  <Title
+                    size="4"
+                    subtitle
+                    v-if="element.stageSubTitle"
+                    class="textShadow"
+                  >
                     <span subtitle class="has-text-white">
                       {{ element.stageSubTitle }}
                     </span>
@@ -61,6 +67,7 @@ export default {
   data() {
     return {
       slider: null,
+      isInit: false,
     };
   },
   computed: {
@@ -80,18 +87,24 @@ export default {
         crossFade: true,
       },
     });
+    setTimeout(() => {
+      this.isInit = true;
+    }, 500);
   },
 };
 </script>
 <style lang="scss" scoped>
+.textShadow {
+  text-shadow: 1px 1px 1px #333333;
+}
 .swiper-container {
   width: 100%;
   height: 460px;
 }
 .slide {
   &-content {
-    background-size: cover;
     height: 100%;
+    background-color: #002343;
   }
   &-overlay {
     position: absolute;
@@ -104,30 +117,48 @@ export default {
     background: -moz-linear-gradient(
       left,
       rgba(0, 35, 67, 1) 0%,
-      rgba(0, 35, 67, 0.6) 58%,
+      rgba(0, 35, 67, 0.8) 30%,
       rgba(0, 35, 67, 0.3) 100%
     ); /* FF3.6-15 */
     background: -webkit-linear-gradient(
       left,
       rgba(0, 35, 67, 1) 0%,
-      rgba(0, 35, 67, 0.6) 58%,
+      rgba(0, 35, 67, 0.8) 30%,
       rgba(0, 35, 67, 0.3) 100%
     ); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(
       to right,
       rgba(0, 35, 67, 1) 0%,
-      rgba(0, 35, 67, 0.6) 58%,
+      rgba(0, 35, 67, 0.8) 30%,
       rgba(0, 35, 67, 0.3) 100%
     ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002343',
     endColorstr='#4d002343',GradientType=1 ); /* IE6-9 */
-    opacity: 0.9;
+    opacity: 0.5;
   }
 
   &-body {
     height: 100%;
     z-index: 2;
     position: relative;
+  }
+
+  &-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    background-size: auto;
+    &.isInit {
+      opacity: 1;
+      transition: opacity 0.6s ease-in-out;
+    }
+    &.isNotInit {
+      opacity: 0;
+    }
   }
 }
 </style>
