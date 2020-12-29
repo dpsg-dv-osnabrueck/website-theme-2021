@@ -46,20 +46,19 @@
                       v-html="item.topicDescription"
                       class="mb-5 content"
                     ></div>
-                    <a
+                    <Button
+                      class="is-primary"
                       @click="
                         goToPage(
                           item.topicPage.post_name,
                           item.topicPage.post_type
                         )
                       "
-                      target="_blank"
+                      iconName="chevron-right"
+                      iconRight
                     >
-                      <button class="button is-primary">
-                        Mehr erfahren
-                        <i class="ml-3 fas fa-chevron-right"></i>
-                      </button>
-                    </a>
+                      {{ i18n.APP_PAGE_TEASER_BUTTON_LABEL }}
+                    </Button>
                   </GridCell>
                 </GridRow>
               </GridCell>
@@ -76,18 +75,20 @@
             class="mr-6"
             :class="{ 'has-text-grey-light': !prevActive }"
           >
-            <i
-              :class="`ml-3 fas fa-chevron-left${mq.small.is ? ' fa-2x' : ''}`"
-            >
-            </i>
+            <Icon
+              name="chevron-left"
+              :size="`${mq.small.is ? '2' : ''}`"
+              class="mr-3"
+            />
             {{ !mq.small.is ? i18n.APP_PAGE_TEASER_PREV : "" }}
           </a>
           <a @click="next" :class="{ 'has-text-grey-light': !nextActive }">
             {{ !mq.small.is ? i18n.APP_PAGE_TEASER_NEXT : "" }}
-            <i
-              :class="`ml-3 fas fa-chevron-right${mq.small.is ? ' fa-2x' : ''}`"
-            >
-            </i>
+            <Icon
+              name="chevron-right"
+              :size="`${mq.small.is ? '2' : ''}`"
+              class="ml-3"
+            />
           </a>
         </GridCell>
       </GridRow>

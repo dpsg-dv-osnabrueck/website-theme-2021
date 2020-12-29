@@ -25,8 +25,8 @@
                       {{ element.stageSubTitle }}
                     </span>
                   </Title>
-                  <div
-                    class="buttons mt-6"
+                  <Button
+                    class="is-primary is-light mt-6"
                     v-if="element.buttonLabel && element.buttonLink.post_name"
                     @click="
                       goToPage(
@@ -34,12 +34,11 @@
                         element.buttonLink.post_type
                       )
                     "
+                    iconName="chevron-right"
+                    iconRight
                   >
-                    <button class="button is-primary is-light">
-                      {{ element.buttonLabel }}
-                      <i class="ml-3 fas fa-chevron-right"></i>
-                    </button>
-                  </div>
+                    {{ element.buttonLabel }}
+                  </Button>
                 </GridCell>
               </GridRow>
             </GridContainer>

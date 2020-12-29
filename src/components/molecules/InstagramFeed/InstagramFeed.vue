@@ -15,7 +15,7 @@
                 @click="openInsta(item.permalink)"
                 :title="i18n.APP_INSTAGRAM_LABEL"
               >
-                <i class="fas fa-external-link-alt fa-2x mb-3"></i><br />
+                <Icon name="external-link-alt" size="2" class="mb-3" />
                 <div>{{ i18n.APP_INSTAGRAM_LABEL }}</div>
               </a>
               <div class="card-image">

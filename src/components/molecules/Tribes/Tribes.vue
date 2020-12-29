@@ -19,13 +19,13 @@
                 </span>
               </Title>
               <div v-if="item.url" class="mb-2">
-                <i class="fas fa-home"></i>
+                <Icon name="home" />
                 <a :href="item.url">
                   {{ i18n.APP_PAGE_TRIBE_WEBSITE }}
                 </a>
               </div>
               <div v-if="item.email">
-                <i class="far fa-envelope"></i>
+                <Icon name="envelope" />
                 <a :href="`mailto:${item.email}`">
                   {{
                     replaceString(i18n.APP_PAGE_TRIBE_MAIL_LABEL, item.tribe)

@@ -15,7 +15,7 @@
               <GridCell
                 :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
               >
-                <img :src="wayStart" />
+                <img :src="wayStart" v-if="!featuredImage" />
                 <div v-if="featuredImage" class="featuredImage mb-6">
                   <img :src="featuredImage" />
                   <div class="p-3 mb-3 has-background-primary">

@@ -13,17 +13,16 @@
       <GridCell width="6" class="flex-left-center">
         <Title size="3" class="mb-5" subtitle>{{ teaser.teaserTitle }}</Title>
         <div v-html="teaser.teaserText"></div>
-        <div
-          class="buttons mt-5"
+        <Button
+          class="is-primary mt-5"
           @click="
             goToPage(teaser.teaserLink.post_name, teaser.teaserLink.post_type)
           "
+          iconName="chevron-right"
+          iconRight
         >
-          <button class="button is-primary">
-            {{ teaser.teaserLinkLabel }}
-            <i class="ml-3 fas fa-chevron-right"></i>
-          </button>
-        </div>
+          {{ teaser.teaserLinkLabel }}
+        </Button>
       </GridCell>
     </GridRow>
   </GridContainer>

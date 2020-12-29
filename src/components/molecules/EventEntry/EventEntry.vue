@@ -7,8 +7,10 @@
             <GridRow vCentered>
               <GridCell with="6">
                 <Title size="5" subtitle>
-                  <i class="fas fa-calendar-alt mr-3 has-text-grey-lighter">
-                  </i>
+                  <Icon
+                    name="calendar-alt"
+                    class="mr-3 has-text-grey-lighter"
+                  />
                   {{ event.eventTitle }}
                 </Title>
               </GridCell>
@@ -44,18 +46,17 @@
                 </div>
               </GridCell>
               <GridCell class="has-text-right" width="1">
-                <i
+                <Icon
+                  :name="`chevron-${details ? 'up' : 'down'}`"
                   v-if="!noDetails"
-                  :class="`ml-3 fas is-clickable fa-chevron-${
-                    details ? 'up' : 'down'
-                  }`"
+                  class="ml-3 is-clickable"
                   @click="details = !details"
-                >
-                </i>
-                <i
+                />
+                <Icon
+                  name="chevron-down"
                   v-if="noDetails"
-                  class="has-text-grey-lighter ml-3 fas is-clickable fa-chevron-down"
-                ></i>
+                  class="has-text-grey-lighter ml-3"
+                />
               </GridCell>
             </GridRow>
             <GridRow v-if="details">
@@ -74,7 +75,7 @@
                   "
                 >
                   {{ event.internalLinkLabel }}
-                  <i class="ml-3 fas fa-chevron-right"></i>
+                  <Icon name="chevron-right" class="ml-3" />
                 </a>
                 <a
                   v-if="event.externalLink"
@@ -82,7 +83,7 @@
                   target="_blank"
                 >
                   {{ event.externalLinkLabel }}
-                  <i class="ml-3 fas fa-chevron-right"></i>
+                  <Icon name="chevron-right" class="ml-3" />
                 </a>
               </GridCell>
             </GridRow>
