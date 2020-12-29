@@ -10,6 +10,14 @@
         <GridCell width="3" v-for="(item, index) of posts" :key="index">
           <div v-if="index <= 3" class="card">
             <div class="is-relative">
+              <a
+                :class="overlayClasses"
+                @click="openInsta(item.permalink)"
+                :title="i18n.APP_INSTAGRAM_LABEL"
+              >
+                <i class="fas fa-external-link-alt fa-2x mb-3"></i><br />
+                <div>{{ i18n.APP_INSTAGRAM_LABEL }}</div>
+              </a>
               <div class="card-image">
                 <img
                   :src="item.media_url"
@@ -28,19 +36,6 @@
                   <source :src="item.media_URL" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-              </div>
-              <div class="card-content flex-left-bottom">
-                <div
-                  class="content has-text-white"
-                  v-html="transformText(item.caption)"
-                ></div>
-                <a :href="item.permalink" target="_blank">
-                  <button class="button is-primary is-light is-small">
-                    <i class="mr-2 fa-2x fab fa-instagram"></i>
-                    {{ i18n.APP_INSTAGRAM_LABEL }}
-                    <i class="ml-3 fas fa-chevron-right"></i>
-                  </button>
-                </a>
               </div>
             </div>
           </div>
@@ -78,6 +73,9 @@ export default {
 
       return formatted;
     },
+    openInsta(url) {
+      window.open(url, '_blank');
+    },
   },
   computed: {
     ...mapState(['instagram']),
@@ -110,6 +108,10 @@ export default {
     posts() {
       return this.instagram.data.filter((item, index) => index <= 3);
     },
+
+    overlayClasses() {
+      return 'card-overlay has-background-primary has-text-white flex-center-center-column is-clickable';
+    },
   },
   mounted() {
     if (this.fortyDaysInPast) {
@@ -121,35 +123,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.card-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: -moz-linear-gradient(
-    top,
-    rgba(0, 35, 67, 0.2) 0%,
-    rgba(0, 35, 67, 0.8) 40%,
-    rgba(0, 35, 67, 1) 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    top,
-    rgba(0, 35, 67, 0.2) 0%,
-    rgba(0, 35, 67, 0.8) 40%,
-    rgba(0, 35, 67, 1) 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 35, 67, 0.2) 0%,
-    rgba(0, 35, 67, 0.8) 40%,
-    rgba(0, 35, 67, 1) 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33002343',
-  endColorstr='#002343',GradientType=0 ); /* IE6-9 */
-}
-.card-image {
-  filter: grayscale(60%) blur(1px);
-  transition: 0.5s;
+.card {
+  &-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    &:hover {
+      transition: opacity 0.3s ease-out;
+      opacity: 0.7;
+    }
+  }
 }
 </style>

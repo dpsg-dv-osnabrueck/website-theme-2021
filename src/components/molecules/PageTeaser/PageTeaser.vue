@@ -36,11 +36,11 @@
                   </GridCell>
                 </GridRow>
               </GridCell>
-              <GridCell width="6">
+              <GridCell width="6" class="flex-left-center">
                 <GridRow>
-                  <GridCell class="flex-left-center" style="height: 100%">
+                  <GridCell>
                     <Title size="3" subtitle class="mb-5">
-                      {{ item.topicPage.post_title }}
+                      {{ item.topicTitle }}
                     </Title>
                     <div
                       v-html="item.topicDescription"
