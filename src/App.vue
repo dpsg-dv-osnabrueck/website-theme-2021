@@ -1,11 +1,13 @@
 <template>
-  <div ref="appRoot">
+  <div id="app-container">
     <div v-if="status.ready === requestStatus">
       <Navigation />
-      <div ref="rootContent">
+      <div ref="appBody" id="app-body">
         <router-view />
       </div>
-      <Footer />
+      <div ref="appFooter" id="app-footer">
+        <Footer />
+      </div>
     </div>
     <div v-else>
       <GridContainer>
@@ -40,34 +42,31 @@ export default {
     status() {
       return requestStatus;
     },
+
+    footerHeight() {
+      return this.$refs.appFooter.clientHeight;
+    },
   },
   methods: {
     ...mapActions(['initializePage']),
     setTitle() {
       document.title = `${this.i18n.APP_TITLE}`;
     },
-    setAppHeight() {
-      const { rootContent } = this.$refs;
-
-      if (rootContent) {
-        const windowHeight = window.innerHeight;
-        const appHeight = this.$refs.appRoot.clientHeight;
-        const offset = windowHeight - appHeight;
-        const newContentHeight = windowHeight - offset;
-
-        if (offset > 0) {
-          rootContent.setAttribute('style', `min-height:${newContentHeight}px`);
-        }
+    setFooterHeight() {
+      const { appBody } = this.$refs;
+      if (appBody) {
+        appBody.style.paddingBottom = `${this.footerHeight}px`;
       }
     },
   },
   mounted() {
     this.setTitle();
     this.initializePage();
+    this.setFooterHeight();
   },
   updated() {
-    this.setAppHeight();
     this.setTitle();
+    this.setFooterHeight();
   },
 };
 </script>

@@ -33,3 +33,19 @@
   align-items: center;
   align-content: center;
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#app-container {
+  min-height: 100%;
+  position: relative;
+}
+#app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
