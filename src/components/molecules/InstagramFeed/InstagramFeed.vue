@@ -1,60 +1,62 @@
 <template>
   <div class="has-background-light py-6">
-    <GridContainer v-if="status.ready === instagram.requestStatus">
-      <GridRow>
-        <GridCell>
-          <Title size="3" subtitle>{{ i18n.APP_INSTAGRAM_TITLE }}</Title>
-        </GridCell>
-      </GridRow>
-      <GridRow isMultiline>
-        <GridCell width="3" v-for="(item, index) of posts" :key="index">
-          <div v-if="index <= 3" class="card">
-            <div class="is-relative">
-              <a
-                :class="overlayClasses"
-                @click="openInsta(item.permalink)"
-                :title="i18n.APP_INSTAGRAM_LABEL"
-              >
-                <Icon name="external-link-alt" size="2" class="mb-3" />
-                <div>{{ i18n.APP_INSTAGRAM_LABEL }}</div>
-              </a>
-              <div class="card-image">
-                <img
-                  :src="item.media_url"
-                  v-if="
-                    item.media_type === 'IMAGE' ||
-                    item.media_type === 'CAROUSEL_ALBUM'
-                  "
-                  class="image"
-                />
-                <video
-                  v-if="item.media_type === 'VIDEO'"
-                  width="320"
-                  height="240"
-                  controls
+    <transition name="fade">
+      <GridContainer v-if="status.ready === instagram.requestStatus">
+        <GridRow>
+          <GridCell>
+            <Title size="3" subtitle>{{ i18n.APP_INSTAGRAM_TITLE }}</Title>
+          </GridCell>
+        </GridRow>
+        <GridRow isMultiline>
+          <GridCell width="3" v-for="(item, index) of posts" :key="index">
+            <div v-if="index <= 3" class="card">
+              <div class="is-relative">
+                <a
+                  :class="overlayClasses"
+                  @click="openInsta(item.permalink)"
+                  :title="i18n.APP_INSTAGRAM_LABEL"
                 >
-                  <source :src="item.media_URL" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                  <Icon name="external-link-alt" size="2" class="mb-3" />
+                  <div>{{ i18n.APP_INSTAGRAM_LABEL }}</div>
+                </a>
+                <div class="card-image">
+                  <img
+                    :src="item.media_url"
+                    v-if="
+                      item.media_type === 'IMAGE' ||
+                      item.media_type === 'CAROUSEL_ALBUM'
+                    "
+                    class="image"
+                  />
+                  <video
+                    v-if="item.media_type === 'VIDEO'"
+                    width="320"
+                    height="240"
+                    controls
+                  >
+                    <source :src="item.media_URL" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
             </div>
-          </div>
-        </GridCell>
-      </GridRow>
-      <GridRow>
-        <GridCell>
-          <div class="buttons is-centered">
-            <a :href="i18n.APP_SOCIAL_INSTAGRAM_URL" target="_blank">
-              <Button isOutlined fab iconName="instagram">{{
-                i18n.APP_SOCIAL_INSTAGRAM_CTA
-              }}</Button>
-            </a>
-          </div>
-        </GridCell>
-      </GridRow>
-    </GridContainer>
+          </GridCell>
+        </GridRow>
+        <GridRow>
+          <GridCell>
+            <div class="buttons is-centered">
+              <a :href="i18n.APP_SOCIAL_INSTAGRAM_URL" target="_blank">
+                <Button isOutlined fab iconName="instagram">{{
+                  i18n.APP_SOCIAL_INSTAGRAM_CTA
+                }}</Button>
+              </a>
+            </div>
+          </GridCell>
+        </GridRow>
+      </GridContainer>
+    </transition>
 
-    <GridContainer v-else>
+    <GridContainer v-if="status.ready !== instagram.requestStatus">
       <GridRow isCentered>
         <GridCell :width="{ tablet: 8, widescreen: 6 }">
           <progress class="progress is-small is-info my-6" max="100"></progress>

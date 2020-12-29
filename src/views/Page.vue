@@ -3,63 +3,66 @@
     <GridContainer>
       <GridRow isCentered>
         <GridCell :width="{ tablet: 10, widescreen: 8 }">
-          <div v-if="page.requestStatus === status.ready">
-            <GridRow isMultiline>
-              <GridCell width="12" v-if="subNav && mq.small.is">
-                <SubNavigationMobile
-                  :data="subNav"
-                  :activePage="currentPage.slug"
-                  v-if="subNav.children"
-                />
-              </GridCell>
-              <GridCell
-                :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
-              >
-                <img :src="wayStart" v-if="!featuredImage" />
-                <div v-if="featuredImage" class="featuredImage mb-6">
-                  <img :src="featuredImage" />
-                  <div class="p-3 mb-3 has-background-primary">
-                    <Title>
-                      <span class="has-text-white">
-                        {{ title }}
-                      </span>
-                    </Title>
-                  </div>
-                </div>
-                <div v-else>
-                  <Title class="mb-2">{{ title }}</Title>
-                </div>
-                <div v-html="content" class="content"></div>
-                <TeamMember :data="teamMember" v-if="teamMember" />
-                <Tribes :data="tribes" v-if="tribes" />
-                <GridCell width="12" class="has-text-right">
-                  <img :src="wayEnd" />
+          <transition name="fade">
+            <div v-if="page.requestStatus === status.ready">
+              <GridRow isMultiline>
+                <GridCell width="12" v-if="subNav && mq.small.is">
+                  <SubNavigationMobile
+                    :data="subNav"
+                    :activePage="currentPage.slug"
+                    v-if="subNav.children"
+                  />
                 </GridCell>
-              </GridCell>
+                <GridCell
+                  :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
+                >
+                  <img :src="wayStart" v-if="!featuredImage" />
+                  <div v-if="featuredImage" class="featuredImage mb-6">
+                    <img :src="featuredImage" />
+                    <div class="p-3 mb-3 has-background-primary">
+                      <Title>
+                        <span class="has-text-white">
+                          {{ title }}
+                        </span>
+                      </Title>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <Title class="mb-2">{{ title }}</Title>
+                  </div>
+                  <div v-html="content" class="content"></div>
+                  <TeamMember :data="teamMember" v-if="teamMember" />
+                  <Tribes :data="tribes" v-if="tribes" />
+                  <GridCell width="12" class="has-text-right">
+                    <img :src="wayEnd" />
+                  </GridCell>
+                </GridCell>
 
-              <GridCell
-                :width="{ tablet: 4, widescreen: 3 }"
-                v-if="subNav && !mq.small.is"
-              >
-                <SubNavigation
-                  :data="subNav"
-                  :activePage="currentPage.slug"
-                  v-if="subNav.children"
-                />
-              </GridCell>
-            </GridRow>
-          </div>
-
-          <div v-if="page.requestStatus === status.loading">
-            <GridRow isCentered>
-              <GridCell>
-                <progress
-                  class="progress is-small is-info my-6"
-                  max="100"
-                ></progress>
-              </GridCell>
-            </GridRow>
-          </div>
+                <GridCell
+                  :width="{ tablet: 4, widescreen: 3 }"
+                  v-if="subNav && !mq.small.is"
+                >
+                  <SubNavigation
+                    :data="subNav"
+                    :activePage="currentPage.slug"
+                    v-if="subNav.children"
+                  />
+                </GridCell>
+              </GridRow>
+            </div>
+          </transition>
+          <transition name="fade">
+            <div v-if="page.requestStatus === status.loading">
+              <GridRow isCentered>
+                <GridCell>
+                  <progress
+                    class="progress is-small is-info my-6"
+                    max="100"
+                  ></progress>
+                </GridCell>
+              </GridRow>
+            </div>
+          </transition>
         </GridCell>
       </GridRow>
     </GridContainer>
@@ -154,6 +157,7 @@ export default {
   mounted() {
     this.loadPage(this.$route.params.slug);
   },
+
   updated() {
     if (this.page.requestStatus === this.status.error) {
       this.$router.push({ name: 'page', params: { slug: 'not-found' } });
