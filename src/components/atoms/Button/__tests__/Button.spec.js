@@ -51,4 +51,13 @@ describe('Button test', () => {
     await wrapper.vm.$nextTick();
     expect(wrapper.find('button').element.disabled).toBe(true);
   });
+
+  test('Button emits click event', async () => {
+    const helloWorld = () => 'hello world';
+
+    wrapper.vm.$emit('click', helloWorld);
+    await wrapper.vm.$nextTick();
+    expect(wrapper.emitted().click).toBeTruthy();
+    expect(wrapper.emitted().click[0][0]).toBe(helloWorld);
+  });
 });

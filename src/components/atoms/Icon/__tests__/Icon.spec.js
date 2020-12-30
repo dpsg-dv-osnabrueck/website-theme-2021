@@ -22,7 +22,7 @@ describe('Icon test', () => {
     expect(wrapper.attributes().class).toContain('fa-2x');
   });
 
-  test('Icon emit click event', async () => {
+  test('Icon emits click event', async () => {
     const helloWorld = () => 'hello world';
 
     wrapper.setProps({ name: 'chevron-right' });
