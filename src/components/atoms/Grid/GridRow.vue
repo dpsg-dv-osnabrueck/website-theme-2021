@@ -23,13 +23,15 @@ export default {
         isDesktop: 'is-desktop',
         isGapless: 'is-gapless',
         isMultiline: 'is-multiline',
+        vCentered: 'is-vcentered',
+        isCentered: 'is-centered',
+      },
+      gapClasses: {
         mobile: 'mobile',
         tablet: 'tablet',
         desktop: 'desktop',
         fullHD: 'fullhd',
         widescreen: 'widescreen',
-        vCentered: 'is-vcentered',
-        isCentered: 'is-centered',
       },
     };
   },
@@ -42,7 +44,7 @@ export default {
       } else if (this.gap) {
         classes.push('is-variable');
         Object.keys(this.gap).forEach((key) => {
-          classes.push(`is-${this.gap[key]}-${this.classNames[key]}`);
+          classes.push(`is-${this.gap[key]}-${this.gapClasses[key]}`);
         });
       }
 
