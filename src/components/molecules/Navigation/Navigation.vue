@@ -158,7 +158,8 @@ export default {
     },
 
     goHome() {
-      this.$router.push({ name: 'Home' });
+      this.closeDropDown();
+      this.goToPage(null, 'Home');
     },
 
     setIds() {
@@ -179,6 +180,14 @@ export default {
   },
   mounted() {
     this.isActiveSub = this.setIds();
+
+    window.onclick = (event) => {
+      const { className } = event.target;
+
+      if (className !== 'navbar-link') {
+        this.closeDropDown();
+      }
+    };
   },
 };
 </script>
