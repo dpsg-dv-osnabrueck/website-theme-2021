@@ -7,10 +7,9 @@
         :key="index"
       >
         <div class="slide-content">
-          <div
-            :class="`slide-image ${isInit ? 'isInit' : 'isNotInit'}`"
-            :style="`background-image: url(${element.stageImage})`"
-          ></div>
+          <div :class="`slide-image ${isInit ? 'isInit' : 'isNotInit'}`">
+            <img :src="element.stageImage" />
+          </div>
           <div class="slide-overlay"></div>
           <div class="slide-body flex-left-center">
             <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
@@ -89,7 +88,7 @@ export default {
     });
     setTimeout(() => {
       this.isInit = true;
-    }, 500);
+    }, 400);
   },
 };
 </script>
@@ -150,11 +149,14 @@ export default {
     z-index: 0;
     height: 100%;
     width: 100%;
-    background-position: center center;
-    background-size: auto;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
     &.isInit {
       opacity: 1;
-      transition: opacity 0.6s ease-in-out;
+      transition: opacity 0.4s ease-in-out;
     }
     &.isNotInit {
       opacity: 0;
