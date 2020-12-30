@@ -8,6 +8,13 @@ describe('Grid row test', () => {
     expect(wrapper.html()).toContain('<div class="columns"></div>');
   });
 
+  test('Custom gaps', async () => {
+    wrapper.setProps({ gap: { mobile: '2' } });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.attributes().class).toContain('is-variable is-2-mobile');
+    expect(wrapper.html()).toContain('<div class="columns is-variable is-2-mobile"></div>');
+  });
+
   test('Props with classes', () => {
     const { classNames } = wrapper.vm.$data;
     Object.keys(classNames).forEach(async (key) => {
@@ -16,12 +23,5 @@ describe('Grid row test', () => {
       expect(wrapper.attributes().class).toContain(classNames[key]);
       expect(true).toBe(true);
     });
-  });
-
-  test('Custom gaps', async () => {
-    wrapper.setProps({ gap: { mobile: '2' } });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.attributes().class).toContain('is-variable is-2-mobile');
-    expect(wrapper.html()).toContain('<div class="columns is-variable is-2-mobile"></div>');
   });
 });

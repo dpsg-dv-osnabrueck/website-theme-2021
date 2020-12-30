@@ -17,8 +17,8 @@ export default {
         mobile: 'mobile',
         tablet: 'tablet',
         desktop: 'desktop',
-        fullHD: 'fullhd',
         widescreen: 'widescreen',
+        fullHD: 'fullhd',
       },
     };
   },
