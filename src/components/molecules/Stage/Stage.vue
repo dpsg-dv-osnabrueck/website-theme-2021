@@ -8,7 +8,7 @@
       >
         <div class="slide-content">
           <div :class="`slide-image ${isInit ? 'isInit' : 'isNotInit'}`">
-            <img :src="element.stageImage" />
+            <img :src="element.stageImage.sizes['1536x1536']" />
           </div>
           <div class="slide-overlay"></div>
           <div class="slide-body flex-left-center">
