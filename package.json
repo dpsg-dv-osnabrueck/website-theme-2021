@@ -1,7 +1,13 @@
 {
   "name": "dpsg-theme-2021",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Custom wordpress theme for dpsg-os.de",
+  "homepage": "https://dpsg-os.de",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpsg-dv-osnabrueck/website-theme-2021.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
