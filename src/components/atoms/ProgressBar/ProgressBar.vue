@@ -1,5 +1,5 @@
 <template>
-  <GridContainer v-if="requestStatus.ready !== status">
+  <GridContainer v-if="requestStatus.ready !== status" class="px-6">
     <GridRow isCentered isMobile>
       <GridCell width="12">
         <progress class="progress is-small is-info my-6" max="100"></progress>

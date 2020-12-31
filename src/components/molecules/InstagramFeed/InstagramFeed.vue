@@ -3,7 +3,7 @@
     <transition name="fade">
       <GridContainer
         v-if="status.ready === instagram.requestStatus"
-        :class="`${mq.small.is ? ' px-3' : ''}`"
+        :class="`${mq.medium.down ? ' px-3' : ''}`"
       >
         <GridRow>
           <GridCell>

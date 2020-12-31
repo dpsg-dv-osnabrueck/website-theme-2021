@@ -1,5 +1,5 @@
 <template>
-  <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
+  <GridContainer :class="`my-6${mq.medium.down ? ' px-3' : ''}`">
     <GridRow>
       <GridCell width="4">
         <div class="card">

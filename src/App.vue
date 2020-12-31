@@ -9,18 +9,7 @@
         <Footer />
       </div>
     </div>
-    <div v-else>
-      <GridContainer>
-        <GridRow isCentered>
-          <GridCell :width="{ tablet: 8, widescreen: 6 }">
-            <progress
-              class="progress is-small is-info my-6"
-              max="100"
-            ></progress>
-          </GridCell>
-        </GridRow>
-      </GridContainer>
-    </div>
+    <ProgressBar :status="requestStatus" />
   </div>
 </template>
 
@@ -37,7 +26,7 @@ export default {
     Footer,
   },
   computed: {
-    ...mapState(['requestStatus', 'instagram']),
+    ...mapState(['requestStatus']),
     ...mapGetters('i18n', ['i18n']),
     status() {
       return requestStatus;

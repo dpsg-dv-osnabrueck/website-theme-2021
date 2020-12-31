@@ -1,5 +1,5 @@
 <template>
-  <div :class="`my-6${mq.small.is ? ' px-3' : ''}`">
+  <div :class="`my-6${mq.medium.down ? ' px-3' : ''}`">
     <GridContainer>
       <GridRow isCentered>
         <GridCell :width="{ tablet: 10, widescreen: 8 }">
@@ -31,16 +31,7 @@
             </div>
           </transition>
           <transition name="fade">
-            <div v-if="post.requestStatus === status.loading">
-              <GridRow isCentered>
-                <GridCell>
-                  <progress
-                    class="progress is-small is-info my-6"
-                    max="100"
-                  ></progress>
-                </GridCell>
-              </GridRow>
-            </div>
+            <ProgressBar :status="post.requestStatus" />
           </transition>
         </GridCell>
       </GridRow>

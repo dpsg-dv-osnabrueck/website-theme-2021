@@ -12,9 +12,9 @@
           </div>
           <div class="slide-overlay"></div>
           <div class="slide-body flex-left-center">
-            <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
+            <GridContainer :class="`my-6${mq.medium.down ? ' px-3' : ''}`">
               <GridRow>
-                <GridCell width="4">
+                <GridCell :width="{ medium: 6, large: 4 }">
                   <Title size="2" subtitle class="has-text-white textShadow">
                     <span subtitle class="has-text-white">
                       {{ element.stageTitle }}
