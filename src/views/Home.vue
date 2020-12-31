@@ -1,11 +1,9 @@
 <template>
   <div>
     <Stage />
-    <div :class="`my-6${mq.small.is ? ' px-3' : ''}`">
-      <StartpageTeaser />
-      <InstagramFeed />
-      <PageTeaser />
-    </div>
+    <StartpageTeaser />
+    <InstagramFeed />
+    <PageTeaser />
   </div>
 </template>
 

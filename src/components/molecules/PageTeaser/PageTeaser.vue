@@ -1,5 +1,5 @@
 <template>
-  <div class="my-6">
+  <div :class="`my-6${mq.small.is ? ' px-3' : ''}`">
     <GridContainer class="mb-5">
       <GridRow>
         <GridCell>
@@ -15,7 +15,6 @@
     <div ref="pageTeaser" class="swiper-container">
       <div class="swiper-wrapper">
         <div
-          width="12"
           v-for="(item, index) of teaserItems"
           :key="index"
           class="swiper-slide"
@@ -68,7 +67,7 @@
       </div>
     </div>
     <GridContainer>
-      <GridRow>
+      <GridRow isMobile>
         <GridCell class="has-text-center">
           <a
             @click="prev"
@@ -78,16 +77,18 @@
             <Icon
               name="chevron-left"
               :size="`${mq.small.is ? '2' : ''}`"
-              class="mr-3"
+              :class="`${mq.small.is ? 'ml-3' : ''}`"
             />
             {{ !mq.small.is ? i18n.APP_PAGE_TEASER_PREV : "" }}
           </a>
+        </GridCell>
+        <GridCell class="has-text-right">
           <a @click="next" :class="{ 'has-text-grey-light': !nextActive }">
             {{ !mq.small.is ? i18n.APP_PAGE_TEASER_NEXT : "" }}
             <Icon
               name="chevron-right"
               :size="`${mq.small.is ? '2' : ''}`"
-              class="ml-3"
+              :class="`${mq.small.is ? 'mr-3' : ''}`"
             />
           </a>
         </GridCell>

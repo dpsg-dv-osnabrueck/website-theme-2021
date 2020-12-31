@@ -10,6 +10,7 @@ import GridCell from '@/components/atoms/Grid/GridCell.vue';
 import Title from '@/components/atoms/Title/Title.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
+import ProgressBar from '@/components/atoms/ProgressBar/ProgressBar.vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,6 +18,7 @@ import '@/assets/styles/main.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@/assets/styles/block-library.min.css';
 import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
 Vue.component('GridContainer', GridContainer);
 Vue.component('GridRow', GridRow);
@@ -24,6 +26,7 @@ Vue.component('GridCell', GridCell);
 Vue.component('Title', Title);
 Vue.component('Button', Button);
 Vue.component('Icon', Icon);
+Vue.component('ProgressBar', ProgressBar);
 
 Vue.use(Vue2TouchEvents);
 

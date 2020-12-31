@@ -1,5 +1,5 @@
 <template>
-  <GridContainer class="my-6">
+  <GridContainer :class="`my-6${mq.small.is ? ' px-3' : ''}`">
     <GridRow>
       <GridCell width="4">
         <div class="card">
@@ -31,10 +31,11 @@
 <script>
 import { mapState } from 'vuex';
 import goToPage from '@/mixins/goToPage';
+import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
   name: 'StartpageTeaser',
-  mixins: [goToPage],
+  mixins: [goToPage, MediaQueries],
   computed: {
     ...mapState(['options']),
     teaser() {
