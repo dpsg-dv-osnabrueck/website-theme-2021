@@ -1,26 +1,9 @@
 import { mapGetters } from 'vuex';
-import regex from '@/data/regex';
 
 export default {
 
   computed: {
     ...mapGetters('i18n', ['i18n']),
-
-    zipRules() {
-      return [(v) => regex.zipCodeGermany.test(v) || this.i18n.FORM_VALIDATION_ZIP];
-    },
-
-    emailRules() {
-      return [(v) => regex.email.test(v) || this.i18n.FORM_VALIDATION_EMAIL];
-    },
-
-    seminarNumberRules() {
-      return [(v) => regex.seminarNumber.test(v) || this.i18n.FORM_VALIDATION_SEMINAR_NUMBER];
-    },
-
-    requiredRules() {
-      return [(v) => !!v || this.i18n.FORM_VALIDATION_REQUIRED];
-    },
 
     gender() {
       return [

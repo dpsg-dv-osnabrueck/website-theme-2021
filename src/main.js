@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vue2TouchEvents from 'vue2-touch-events';
+import Vuelidate from 'vuelidate';
 import storageHelper from '@/helper/storageHelper';
 import storageNames from '@/data/storageNames';
 import { mapActions } from 'vuex';
@@ -11,6 +12,9 @@ import Title from '@/components/atoms/Title/Title.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 import Icon from '@/components/atoms/Icon/Icon.vue';
 import ProgressBar from '@/components/atoms/ProgressBar/ProgressBar.vue';
+import Input from '@/components/atoms/Form/Input.vue';
+import TextArea from '@/components/atoms/Form/TextArea.vue';
+import Notification from '@/components/atoms/Notification/Notification.vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -26,8 +30,12 @@ Vue.component('Title', Title);
 Vue.component('Button', Button);
 Vue.component('Icon', Icon);
 Vue.component('ProgressBar', ProgressBar);
+Vue.component('Input', Input);
+Vue.component('TextArea', TextArea);
+Vue.component('Notification', Notification);
 
 Vue.use(Vue2TouchEvents);
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 

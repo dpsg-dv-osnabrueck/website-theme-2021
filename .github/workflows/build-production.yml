@@ -32,6 +32,12 @@ jobs:
       - name: Unit tests
         run: npm run test:unit
 
+      - name: Set env
+        env:
+          PROD_ENV_FILE: ${{ secrets.DOT_ENV }}
+        run: |
+          echo $PROD_ENV_FILE | base64 --decode > .env
+
       - name: Build
         run: npm run build
 

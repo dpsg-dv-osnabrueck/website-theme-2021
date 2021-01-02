@@ -28,5 +28,8 @@ export default {
     REFRESH: '/refresh_access_token',
     PARAMS: ['?grant_type=ig_refresh_token', '&access_token='],
   },
-
+  MATTERMOST: {
+    BASE: 'https://team.dpsg-os.de',
+    HOOKS: '/hooks',
+  },
 };
