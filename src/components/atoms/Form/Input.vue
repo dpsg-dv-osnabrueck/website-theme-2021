@@ -20,7 +20,7 @@
         :required="required"
       />
 
-      <span class="icon is-lef" v-if="iconLeft">
+      <span class="icon is-left" v-if="iconLeft">
         <Icon :name="iconLeft" />
       </span>
 
@@ -56,7 +56,7 @@ export default {
     label: String,
     type: {
       type: String,
-      default: 'Text',
+      default: 'text',
     },
     placeholder: String,
     isSmall: Boolean,

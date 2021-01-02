@@ -75,6 +75,7 @@ export default {
       sendStatus: null,
       timeStampStart: null,
       tribe: null,
+      sendAttempt: false,
     };
   },
   validations: {
@@ -97,15 +98,16 @@ export default {
   methods: {
     sendForm() {
       this.sendStatus = requestStatus.loading;
+      this.sendAttempt = true;
       if (this.validForm()) {
         this.sendData();
       } else {
-        this.sendStatus = requestStatus.error;
+        this.sendStatus = requestStatus.init;
       }
     },
 
     invalidField(name) {
-      return this.sendStatus === requestStatus.error && this.$v.formData[name].$invalid;
+      return this.sendAttempt && this.$v.formData[name].$invalid;
     },
 
     validTimeSpan(now) {
@@ -121,6 +123,7 @@ export default {
         })
         .catch(() => {
           this.sendStatus = requestStatus.error;
+          this.sendAttempt = false;
         });
     },
 

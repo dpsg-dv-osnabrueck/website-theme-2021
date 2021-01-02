@@ -36,13 +36,13 @@ describe('Button test', () => {
     await wrapper.vm.$nextTick();
     expect(wrapper.html()).toContain('<span>Button Label</span> <span class="icon"><i class="fas fa-chevron-right"></i></span>');
   });
+
   test('Button test props with classes', () => {
     const { classNames } = wrapper.vm.$data;
     Object.keys(classNames).forEach(async (key) => {
       wrapper.setProps({ [key]: true });
       await wrapper.vm.$nextTick();
-      expect(wrapper.attributes().class).toContain(classNames[key]);
-      expect(true).toBe(true);
+      expect(wrapper.classes()).toContain(classNames[key]);
     });
   });
 
