@@ -13,6 +13,7 @@
         :id="fieldId"
         :value="value"
         v-on:input="updateValue($event.target.value)"
+        :required="required"
       />
     </p>
     <p :class="`help ${statusClasses}`" v-if="isSuccess || isError">
@@ -47,6 +48,7 @@ export default {
     successMessage: String,
     errorMessage: String,
     required: Boolean,
+    isStatic: Boolean,
   },
   data() {
     return {

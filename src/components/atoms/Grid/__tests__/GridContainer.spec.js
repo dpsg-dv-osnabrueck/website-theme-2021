@@ -13,8 +13,7 @@ describe('Grid container test', () => {
     Object.keys(classNames).forEach(async (key) => {
       wrapper.setProps({ [key]: true });
       await wrapper.vm.$nextTick();
-      expect(wrapper.attributes().class).toContain(classNames[key]);
-      expect(true).toBe(true);
+      expect(wrapper.classes()).toContain(classNames[key]);
     });
   });
 });
