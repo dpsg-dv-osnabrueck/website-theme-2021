@@ -17,6 +17,7 @@
                   :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
                 >
                   <img :src="wayStart" v-if="!featuredImage" />
+                  <ContactForm v-if="currentPage.template === 'contact.php'" />
                   <div v-if="featuredImage" class="featuredImage mb-6">
                     <img :src="featuredImage" />
                     <div class="p-3 mb-3 has-background-primary">
@@ -33,6 +34,7 @@
                   <div v-html="content" class="content"></div>
                   <TeamMember :data="teamMember" v-if="teamMember" />
                   <Tribes :data="tribes" v-if="tribes" />
+
                   <GridCell width="12" class="has-text-right">
                     <img :src="wayEnd" />
                   </GridCell>
@@ -69,6 +71,7 @@ import TeamMember from '@/components/molecules/TeamMember/TeamMember.vue';
 import wayStart from '@/assets/img/wayStart.svg';
 import wayEnd from '@/assets/img/wayEnd.svg';
 import Tribes from '@/components/molecules/Tribes/Tribes.vue';
+import ContactForm from '@/components/molecules/ContactForm/ContactForm.vue';
 import MediaQueries from '@/mixins/MediaQueries';
 
 export default {
@@ -79,6 +82,7 @@ export default {
     SubNavigationMobile,
     TeamMember,
     Tribes,
+    ContactForm,
   },
   computed: {
     ...mapState(['page', 'menus']),
