@@ -17,6 +17,7 @@
                     :src="featuredImage"
                     v-if="featuredImage"
                     is3by2
+                    class="mb-6"
                   />
                   <div v-html="content" class="content"></div>
 

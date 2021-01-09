@@ -26,6 +26,7 @@
                     :src="featuredImage"
                     v-if="featuredImage"
                     is3by2
+                    class="mb-6"
                   />
 
                   <ContactForm v-if="currentPage.template === 'contact.php'" />
