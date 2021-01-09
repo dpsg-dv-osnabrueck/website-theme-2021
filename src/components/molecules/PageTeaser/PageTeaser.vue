@@ -65,28 +65,40 @@
     <GridContainer>
       <GridRow isMobile>
         <GridCell class="has-text-center">
-          <a
+          <Button
             @click="prev"
-            class="mr-6"
-            :class="{ 'has-text-grey-light': !prevActive }"
+            iconName="chevron-left"
+            :disabled="!prevActive"
+            v-if="mq.small.is"
+            iconOnly
+          />
+          <Button
+            @click="prev"
+            iconName="chevron-left"
+            :disabled="!prevActive"
+            v-else
           >
-            <Icon
-              name="chevron-left"
-              :size="`${mq.small.is ? '2' : ''}`"
-              :class="`${mq.small.is ? 'ml-3' : ''}`"
-            />
-            {{ !mq.small.is ? i18n.APP_PAGE_TEASER_PREV : "" }}
-          </a>
+            {{ i18n.APP_PAGE_TEASER_PREV }}
+          </Button>
         </GridCell>
         <GridCell class="has-text-right">
-          <a @click="next" :class="{ 'has-text-grey-light': !nextActive }">
-            {{ !mq.small.is ? i18n.APP_PAGE_TEASER_NEXT : "" }}
-            <Icon
-              name="chevron-right"
-              :size="`${mq.small.is ? '2' : ''}`"
-              :class="`${mq.small.is ? 'mr-3' : ''}`"
-            />
-          </a>
+          <Button
+            @click="next"
+            iconName="chevron-right"
+            iconRight
+            :disabled="!nextActive"
+            v-if="mq.small.is"
+            iconOnly
+          />
+          <Button
+            v-else
+            @click="next"
+            iconName="chevron-right"
+            iconRight
+            :disabled="!nextActive"
+          >
+            {{ i18n.APP_PAGE_TEASER_NEXT }}
+          </Button>
         </GridCell>
       </GridRow>
     </GridContainer>

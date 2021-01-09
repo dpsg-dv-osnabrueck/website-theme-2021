@@ -50,6 +50,7 @@ describe('Button test', () => {
     wrapper.setProps({ disabled: true });
     await wrapper.vm.$nextTick();
     expect(wrapper.find('button').element.disabled).toBe(true);
+    expect(wrapper.classes()).not.toContain('is-clickable');
   });
 
   test('Button emits click event', async () => {
@@ -59,5 +60,17 @@ describe('Button test', () => {
     await wrapper.vm.$nextTick();
     expect(wrapper.emitted().click).toBeTruthy();
     expect(wrapper.emitted().click[0][0]).toBe(helloWorld);
+  });
+});
+
+describe('Button test icon only', () => {
+  let wrapper;
+  beforeEach(() => {
+    Vue.component('Icon', Icon);
+    wrapper = mount(Button);
+  });
+
+  test('Button has no slot', () => {
+    expect(wrapper.html()).not.toContain('<span>Button Label</span>');
   });
 });

@@ -3,7 +3,7 @@
     <span class="icon" v-if="iconName && !iconRight">
       <Icon :name="iconName" :fab="fab" />
     </span>
-    <span><slot></slot></span>
+    <span v-if="!iconOnly"><slot></slot></span>
     <span class="icon" v-if="iconName && iconRight">
       <Icon :name="iconName" :fab="fab" />
     </span>
@@ -26,6 +26,7 @@ export default {
     iconName: String,
     iconRight: Boolean,
     fab: Boolean,
+    iconOnly: Boolean,
   },
   data() {
     return {
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     classes() {
-      const classes = ['button', 'is-clickable'];
+      const classes = ['button', `${this.disabled ? '' : 'is-clickable'}`];
       Object.keys(this.classNames).forEach((key) => {
         if (this[key]) {
           classes.push(this.classNames[key]);
