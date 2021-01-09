@@ -2,13 +2,7 @@
   <GridContainer :class="`my-6${mq.medium.down ? ' px-3' : ''}`">
     <GridRow>
       <GridCell width="4">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image">
-              <img :src="image" />
-            </figure>
-          </div>
-        </div>
+        <RenderImage :src="image" is3by2 />
       </GridCell>
       <GridCell width="6" class="flex-left-center">
         <Title size="3" class="mb-5" subtitle>{{ teaser.teaserTitle }}</Title>
@@ -42,7 +36,7 @@ export default {
       return this.options.data.acf.startpageTeaser;
     },
     image() {
-      return this.teaser.teaserImage.sizes.front_news;
+      return this.teaser.teaserImage.sizes['is-3by2'];
     },
   },
 };

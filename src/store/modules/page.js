@@ -89,7 +89,7 @@ export const actions = {
     const id = state.currentPage.featured_media;
     return new Promise((resolve) => {
       if (id) {
-        imageHelper(id, 'portrait').then((response) => {
+        imageHelper(id, 'is-3by2').then((response) => {
           commit('SET_FEATURED_IMAGE', response);
           resolve();
         });

@@ -9,13 +9,15 @@
       <div>{{ i18n.APP_INSTAGRAM_LABEL }}</div>
     </a>
     <div class="card-image">
-      <img
-        :src="item.media_url"
-        v-if="
-          item.media_type === 'IMAGE' || item.media_type === 'CAROUSEL_ALBUM'
-        "
-        class="image"
-      />
+      <figure class="image is-square">
+        <img
+          :src="item.media_url"
+          v-if="
+            item.media_type === 'IMAGE' || item.media_type === 'CAROUSEL_ALBUM'
+          "
+        />
+      </figure>
+
       <video
         v-if="item.media_type === 'VIDEO'"
         width="320"

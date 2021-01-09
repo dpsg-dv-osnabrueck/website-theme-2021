@@ -15,6 +15,7 @@ import ProgressBar from '@/components/atoms/ProgressBar/ProgressBar.vue';
 import Input from '@/components/atoms/Form/Input.vue';
 import TextArea from '@/components/atoms/Form/TextArea.vue';
 import Notification from '@/components/atoms/Notification/Notification.vue';
+import RenderImage from '@/components/atoms/RenderImage/RenderImage.vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -33,6 +34,7 @@ Vue.component('ProgressBar', ProgressBar);
 Vue.component('Input', Input);
 Vue.component('TextArea', TextArea);
 Vue.component('Notification', Notification);
+Vue.component('RenderImage', RenderImage);
 
 Vue.use(Vue2TouchEvents);
 Vue.use(Vuelidate);

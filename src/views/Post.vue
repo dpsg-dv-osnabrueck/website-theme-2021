@@ -8,19 +8,16 @@
               <GridRow isMultiline>
                 <GridCell width="12">
                   <img :src="wayStart" />
-                  <div v-if="featuredImage" class="featuredImage mb-6">
-                    <img :src="featuredImage" />
-                    <div class="p-3 mb-3 has-background-primary">
-                      <Title>
-                        <span class="has-text-white">
-                          {{ title }}
-                        </span>
-                      </Title>
-                    </div>
-                  </div>
-                  <div v-else>
+
+                  <div>
                     <Title class="mb-2">{{ title }}</Title>
                   </div>
+
+                  <RenderImage
+                    :src="featuredImage"
+                    v-if="featuredImage"
+                    is3by2
+                  />
                   <div v-html="content" class="content"></div>
 
                   <GridCell width="12" class="has-text-right">
