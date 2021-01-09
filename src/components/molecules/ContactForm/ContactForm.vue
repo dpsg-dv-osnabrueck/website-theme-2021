@@ -120,6 +120,9 @@ export default {
         .then(() => {
           this.sendStatus = requestStatus.ready;
           this.resetForm();
+          setTimeout(() => {
+            this.sendStatus = requestStatus.init;
+          }, 3000);
         })
         .catch(() => {
           this.sendStatus = requestStatus.error;
@@ -138,6 +141,7 @@ export default {
         message: null,
         tribe: null,
       };
+      this.sendAttempt = false;
     },
   },
   computed: {
