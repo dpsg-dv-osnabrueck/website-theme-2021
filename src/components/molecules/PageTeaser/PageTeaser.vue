@@ -24,14 +24,10 @@
               <GridCell width="4">
                 <GridRow v-if="item.topicImage">
                   <GridCell>
-                    <div class="card">
-                      <div class="card-image">
-                        <img
-                          :src="item.topicImage.sizes.front_news"
-                          class="image"
-                        />
-                      </div>
-                    </div>
+                    <RenderImage
+                      :src="item.topicImage.sizes['is-3by2']"
+                      is3by2
+                    />
                   </GridCell>
                 </GridRow>
               </GridCell>

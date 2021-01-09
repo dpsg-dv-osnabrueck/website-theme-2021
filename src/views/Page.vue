@@ -16,21 +16,20 @@
                 <GridCell
                   :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
                 >
-                  <img :src="wayStart" v-if="!featuredImage" />
-                  <ContactForm v-if="currentPage.template === 'contact.php'" />
-                  <div v-if="featuredImage" class="featuredImage mb-6">
-                    <img :src="featuredImage" />
-                    <div class="p-3 mb-3 has-background-primary">
-                      <Title>
-                        <span class="has-text-white">
-                          {{ title }}
-                        </span>
-                      </Title>
-                    </div>
-                  </div>
-                  <div v-else>
+                  <img :src="wayStart" />
+
+                  <div>
                     <Title class="mb-2">{{ title }}</Title>
                   </div>
+
+                  <RenderImage
+                    :src="featuredImage"
+                    v-if="featuredImage"
+                    is3by2
+                  />
+
+                  <ContactForm v-if="currentPage.template === 'contact.php'" />
+
                   <div v-html="content" class="content"></div>
                   <TeamMember :data="teamMember" v-if="teamMember" />
                   <Tribes :data="tribes" v-if="tribes" />
@@ -170,25 +169,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.featuredImage {
-  width: 100%;
-  height: 300px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-end;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  > div {
-    position: absolute;
-    opacity: 0.8;
-  }
-}
-</style>
