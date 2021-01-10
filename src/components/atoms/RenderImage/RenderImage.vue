@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card-image">
       <figure :class="classes">
-        <img :src="src" v-if="!swiperLazy" />
-        <img :data-src="src" class="swiper-lazy" v-else />
-        <div class="swiper-lazy-preloader" v-if="swiperLazy"></div>
+        <transition name="fade">
+          <img :src="src" @load="initImage" v-show="isLoaded" />
+        </transition>
       </figure>
     </div>
   </div>
@@ -37,7 +37,6 @@ export default {
     is1by2: Boolean,
     is1by3: Boolean,
     isRounded: Boolean,
-    swiperLazy: Boolean,
   },
   data() {
     return {
@@ -65,11 +64,12 @@ export default {
         is1by3: 'is-1by3',
         isRounded: 'is-rounded',
       },
+      isLoaded: false,
     };
   },
   computed: {
     classes() {
-      const classes = ['image'];
+      const classes = ['image', 'animatedBackground'];
 
       Object.keys(this.classNames).forEach((key) => {
         if (this[key]) {
@@ -77,6 +77,11 @@ export default {
         }
       });
       return classes.join(' ');
+    },
+  },
+  methods: {
+    initImage() {
+      this.isLoaded = true;
     },
   },
 };
