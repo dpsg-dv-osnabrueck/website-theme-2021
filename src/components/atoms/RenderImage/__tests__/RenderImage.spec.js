@@ -9,7 +9,7 @@ describe('RenderImage tests', () => {
     wrapper.setProps({ src: logo });
     await wrapper.vm.$nextTick();
     expect(wrapper.find('img').attributes('src')).toBe(logo);
-    expect(wrapper.html()).toContain('<figure class="image"><img src="https://dpsg-os.de/wp-content/uploads/2015/10/luenne_50-190-1000x667.jpg"></figure>');
+    expect(wrapper.html()).toContain('<img src="https://dpsg-os.de/wp-content/uploads/2015/10/luenne_50-190-1000x667.jpg">');
   });
 
   test('Props with classes', () => {
