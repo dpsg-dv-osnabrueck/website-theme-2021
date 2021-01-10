@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-image">
       <figure :class="classes">
-        <img :src="src" />
+        <img :src="src" v-if="!swiperLazy" />
+        <img :data-src="src" class="swiper-lazy" v-else />
+        <div class="swiper-lazy-preloader" v-if="swiperLazy"></div>
       </figure>
     </div>
   </div>
@@ -35,6 +37,7 @@ export default {
     is1by2: Boolean,
     is1by3: Boolean,
     isRounded: Boolean,
+    swiperLazy: Boolean,
   },
   data() {
     return {

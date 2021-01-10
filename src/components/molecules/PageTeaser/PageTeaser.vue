@@ -27,6 +27,7 @@
                     <RenderImage
                       :src="item.topicImage.sizes['is-3by2']"
                       is3by2
+                      swiperLazy
                     />
                   </GridCell>
                 </GridRow>
@@ -146,7 +147,10 @@ export default {
     },
   },
   mounted() {
-    this.slider = new Swiper(this.$refs.pageTeaser);
+    this.slider = new Swiper(this.$refs.pageTeaser, {
+      preloadImages: false,
+      lazy: true,
+    });
     this.slider.on('slideChange', () => {
       this.activeSlide = this.slider.activeIndex + 1;
       this.prevActive = !this.slider.isBeginning;
