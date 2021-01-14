@@ -10,7 +10,7 @@
         </GridRow>
         <GridRow>
           <GridCell width="6">
-            <RenderImage :src="item.photo" is3by4 />
+            <RenderImage :src="item.photo.sizes['is-3by4']" is3by4 />
           </GridCell>
           <GridCell width="6">
             <div v-html="item.description"></div>
