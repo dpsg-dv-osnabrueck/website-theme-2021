@@ -14,7 +14,7 @@
                   />
                 </GridCell>
                 <GridCell
-                  :width="`${subNav ? { tablet: 8, widescreen: 9 } : '12'}`"
+                  :width="`${sideMenu ? { tablet: 8, widescreen: 9 } : '12'}`"
                 >
                   <img :src="wayStart" />
 
@@ -105,6 +105,12 @@ export default {
 
     subNav() {
       return this.page.subNav;
+    },
+
+    sideMenu() {
+      if (!this.subNav) return false;
+      if (this.subNav.children) return true;
+      return false;
     },
 
     featuredImage() {
