@@ -6,7 +6,9 @@ export default {
       if (type === 'custom' && url.match(regex.routerLink)) {
         this.$router.push({ name: url.split('.')[1] });
       } else if (type === 'custom' && url) {
-        window.location.assign(url);
+        window.open(
+          url, '_blank',
+        );
       }
 
       if (type === 'custom') return;
